@@ -1,4 +1,9 @@
-@import "~bootstrap/scss/bootstrap";
-@import "assets/styles/normalize";
 @import "assets/styles/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "assets/styles/themes/bootstrap-theme-1/main";
+@import "assets/styles/normalize";
 @import "assets/styles/mixins";
+
+body {
+  background: #f4f4f4;
+}
