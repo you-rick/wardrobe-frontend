@@ -3,8 +3,11 @@ import {Routes, RouterModule} from '@angular/router';
 import {DashboardComponent} from "./dashboard.component";
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
-  {path: 'items', loadChildren: () => import('./items/items.module').then(m => m.ItemsModule)}
+  {path: '', component: DashboardComponent, children: [
+     {path: 'items', loadChildren: () => import('./items/items.module').then(m => m.ItemsModule)}
+    ]
+  },
+
 
 ];
 
