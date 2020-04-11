@@ -1,0 +1,10 @@
+<div class="row" *ngIf="userInfo">
+    <div class="col-12">
+        <h2 class="mb-3">My Profile</h2>
+        <div class="mb-3">
+          <div><strong>FullName:</strong> {{userInfo?.fullName}}</div>
+          <div><strong>Email:</strong> {{userInfo?.email}}</div>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary" (click)="onLogout()">Log out</button>
+    </div>
+</div>
