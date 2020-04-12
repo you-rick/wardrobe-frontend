@@ -5,8 +5,6 @@ import { map } from 'rxjs/operators';
 
 import {environment} from "../../../environments/environment";
 
-import {Item} from "../models/item.model";
-
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +17,10 @@ export class ItemService {
   getItemList() {
     return this.http.get(this.baseURL);
   }
-  postItem(item: Item) {
+  postItem(item) {
     return this.http.post(this.baseURL, item);
   }
-  putItem(item: Item) {
+  putItem(item) {
     return this.http.put(this.baseURL + `/${item._id}`, item);
   }
   deleteItem(_id: string) {

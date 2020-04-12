@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule} from "@angular/forms";
 import {ItemsRouting} from "./items.routing";
 
 import {ItemsComponent} from "./items.component";
@@ -10,7 +11,8 @@ import { ItemsListComponent } from './items-list/items-list.component';
   declarations: [ItemsComponent, AddItemComponent, ItemsListComponent],
   imports: [
     CommonModule,
-    ItemsRouting
+    ItemsRouting,
+    FormsModule
   ]
 })
 export class ItemsModule { }

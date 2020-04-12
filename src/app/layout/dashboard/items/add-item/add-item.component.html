@@ -2,14 +2,14 @@
   <div class="col-10">
     <div class="panel card p-3">
       <h3 class="mb-3">Add new item</h3>
-      <form>
+      <form #itemForm="ngForm" (ngSubmit)="onSubmit(itemForm)">
         <div class="form-group">
           <label>Item Name</label>
-          <input type="text" class="form-control" placeholder="Enter item name">
+          <input type="text" class="form-control" name="title" [ngModel]="newItem.title" placeholder="Enter item name">
         </div>
         <div class="form-group">
           <label>Item Photo</label>
-          <input type="file" class="form-control" placeholder="Add item photo">
+          <input type="file" class="form-control" name="photo" [ngModel]="newItem.photo" (change)="fileChange($event)" placeholder="Add item photo">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
       </form>

@@ -1,1 +1,14 @@
-<p>items-list works!</p>
+<div class="d-flex flex-wrap">
+  <ng-container class="col-6" *ngIf="itemsList">
+    <ng-container *ngFor="let item of itemsList">
+      <div class="col-6 card">
+        <img [src]="envPath + item.photo" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+
