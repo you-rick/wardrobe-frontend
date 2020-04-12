@@ -1,0 +1,37 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <div class="sidebar-brand-text mx-3">Wardrobe App</div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="'/dashboard/profile'">
+      <i class="fa fa-user"></i>
+      <span>Profile</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="'/dashboard/items'">
+      <i class="fa fa-list"></i>
+      <span>items</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="'/dashboard/items/add'">
+      <i class="fa fa-plus"></i>
+      <span>add item</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <li class="nav-item">
+    <a class="nav-link" (click)="logout()">
+      <i class="fa fa-sign-out"></i>
+      <span>log out</span></a>
+  </li>
+
+</ul>
