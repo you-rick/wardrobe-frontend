@@ -1,0 +1,23 @@
+<nav class="navbar navbar-dark bg-gradient-primary justify-content-between mb-5">
+  <a class="navbar-brand" href="#">Wardrobe App</a>
+
+  <div class="navbar-expand-lg">
+    <ul class="navbar-nav">
+      <ng-container *ngIf="isLogged">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/dashboard/profile'">Profile</a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="!isLogged">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/sign-in'">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/sign-up'">Sign Up</a>
+        </li>
+      </ng-container>
+
+    </ul>
+  </div>
+
+</nav>
