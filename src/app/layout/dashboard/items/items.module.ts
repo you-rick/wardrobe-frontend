@@ -10,14 +10,17 @@ import {AddItemComponent} from "./add-item/add-item.component";
 import { ItemsListComponent } from './items-list/items-list.component';
 import {ToastComponent} from "../../shared/components/toast/toast.component";
 
+import {EnumToArrayPipe} from "../../../shared/pipes/enum-to-array.pipe";
+
 @NgModule({
-  declarations: [ItemsComponent, AddItemComponent, ItemsListComponent, ToastComponent],
+  declarations: [ItemsComponent, AddItemComponent, ItemsListComponent, ToastComponent, EnumToArrayPipe],
   imports: [
     CommonModule,
     ItemsRouting,
     FormsModule,
     ImageCropperModule,
     NgbModule
-  ]
+  ],
+  exports: [EnumToArrayPipe]
 })
 export class ItemsModule { }

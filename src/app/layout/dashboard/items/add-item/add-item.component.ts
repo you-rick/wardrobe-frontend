@@ -6,6 +6,9 @@ import {Item} from "../../../../shared/models/item.model";
 import {ItemService} from "../../../../shared/services/item.service";
 import {ToastService} from "../../../../shared/services/toast.service";
 
+import {ItemType} from "../../../../shared/enums/item-type.enum";
+
+
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
@@ -13,6 +16,7 @@ import {ToastService} from "../../../../shared/services/toast.service";
 })
 export class AddItemComponent implements OnInit {
   public newItem: Item;
+  public itemTypes = ItemType;
   public itemPhoto;
   public imageChangedEvent: any = '';
   public croppedImage: any = '';
@@ -41,7 +45,7 @@ export class AddItemComponent implements OnInit {
       this.imageChangedEvent = event;
     } else {
       this.inputFile.nativeElement.value = "";
-      this.toastService.show('File is too big', {classname: 'bg-danger text-light', delay: 2000});
+      this.toastService.show('File is too big', {classname: 'bg-danger text-light'});
     }
 
   }
@@ -70,7 +74,7 @@ export class AddItemComponent implements OnInit {
       this.itemService.postItem(form.value).subscribe((response) => {
         console.log(response);
         this.resetForm(form);
-          this.toastService.show('Item successfully saved!', {classname: 'bg-success text-light', delay: 2000});
+          this.toastService.show('Item successfully saved!', {classname: 'bg-success text-light'});
 
       });
 

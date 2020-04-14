@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import { map } from 'rxjs/operators';
 
 import {environment} from "../../../environments/environment";
+import {Item} from "../models/item.model";
 
 
 @Injectable({
@@ -17,10 +18,10 @@ export class ItemService {
   getItemList() {
     return this.http.get(this.baseURL);
   }
-  postItem(item) {
+  postItem(item:Item) {
     return this.http.post(this.baseURL, item);
   }
-  putItem(item) {
+  putItem(item:Item) {
     return this.http.put(this.baseURL + `/${item._id}`, item);
   }
   deleteItem(_id: string) {
