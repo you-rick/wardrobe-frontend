@@ -7,6 +7,7 @@ import {ItemService} from "../../../../shared/services/item.service";
 import {ToastService} from "../../../../shared/services/toast.service";
 
 import {ItemType} from "../../../../shared/enums/item-type.enum";
+import {ItemWeather} from "../../../../shared/enums/item-weather.enum";
 
 
 @Component({
@@ -17,6 +18,7 @@ import {ItemType} from "../../../../shared/enums/item-type.enum";
 export class AddItemComponent implements OnInit {
   public newItem: Item;
   public itemTypes = ItemType;
+  public itemWeather = ItemWeather;
   public itemPhoto;
   public imageChangedEvent: any = '';
   public croppedImage: any = '';
@@ -68,13 +70,16 @@ export class AddItemComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
+    console.log(form.value);
+
     if (this.itemPhoto) {
       form.value.photo = this.itemPhoto;
+
 
       this.itemService.postItem(form.value).subscribe((response) => {
         console.log(response);
         this.resetForm(form);
-          this.toastService.show('Item successfully saved!', {classname: 'bg-success text-light'});
+        this.toastService.show('Item successfully saved!', {classname: 'bg-success text-light'});
 
       });
 
