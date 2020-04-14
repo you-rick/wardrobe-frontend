@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {ImageCroppedEvent} from "ngx-image-cropper";
 
 import {Item} from "../../../../shared/models/item.model";
 import {ItemService} from "../../../../shared/services/item.service";
+import {ToastService} from "../../../../shared/services/toast.service";
 
 @Component({
   selector: 'app-add-item',
@@ -15,9 +16,12 @@ export class AddItemComponent implements OnInit {
   public itemPhoto;
   public imageChangedEvent: any = '';
   public croppedImage: any = '';
-  public isFileBig = 0;
 
-  constructor(private itemService: ItemService) {
+  toastAutohide = true;
+
+  @ViewChild('inputFile', {static: true}) inputFile: ElementRef;
+
+  constructor(private itemService: ItemService, public toastService: ToastService) {
   }
 
   ngOnInit() {
@@ -33,8 +37,13 @@ export class AddItemComponent implements OnInit {
   }
 
   fileChangeEvent(event: any): void {
-    console.log(event);
-    this.imageChangedEvent = event;
+    if (event.target.files[0].size <= 500000) {
+      this.imageChangedEvent = event;
+    } else {
+      this.inputFile.nativeElement.value = "";
+      this.toastService.show('File is too big', {classname: 'bg-danger text-light', delay: 2000});
+    }
+
   }
 
   imageCropped(event: ImageCroppedEvent) {
@@ -61,7 +70,8 @@ export class AddItemComponent implements OnInit {
       this.itemService.postItem(form.value).subscribe((response) => {
         console.log(response);
         this.resetForm(form);
-        // M.toast({html: 'Yey! it is saved!', classes: 'rounded'});
+          this.toastService.show('Item successfully saved!', {classname: 'bg-success text-light', delay: 2000});
+
       });
 
     }
