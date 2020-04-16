@@ -11,9 +11,10 @@ import { ItemsListComponent } from './items-list/items-list.component';
 import {ToastComponent} from "../../shared/components/toast/toast.component";
 
 import {EnumToArrayPipe} from "../../../shared/pipes/enum-to-array.pipe";
+import { ItemInfoComponent } from './item-info/item-info.component';
 
 @NgModule({
-  declarations: [ItemsComponent, AddItemComponent, ItemsListComponent, ToastComponent, EnumToArrayPipe],
+  declarations: [ItemsComponent, AddItemComponent, ItemsListComponent, ToastComponent, EnumToArrayPipe, ItemInfoComponent],
   imports: [
     CommonModule,
     ItemsRouting,

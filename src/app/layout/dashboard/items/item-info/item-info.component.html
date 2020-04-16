@@ -1,0 +1,16 @@
+<div class="container" *ngIf="selectedItem">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-between mb-4">
+      <h4>{{selectedItem.title}}</h4>
+      <a [routerLink]="'edit'">Edit</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <img [src]="envPath + selectedItem.photo"/>
+    </div>
+    <div class="col-6">
+      <p>{{selectedItem.type}},  {{selectedItem.weather}}</p>
+    </div>
+  </div>
+</div>

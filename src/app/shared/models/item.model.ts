@@ -4,4 +4,5 @@ export class Item {
   photo: string;
   type?: any[];
   weather?: any[];
+  userId?: string;
 }

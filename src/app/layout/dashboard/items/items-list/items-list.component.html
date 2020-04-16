@@ -1,13 +1,13 @@
 <div class="d-flex flex-wrap">
   <ng-container class="col-6" *ngIf="itemsList">
     <ng-container *ngFor="let item of itemsList">
-      <div class="col-6 card">
+      <a class="col-6 card" [routerLink]="item._id">
         <img [src]="envPath + item.photo" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{item.title}}</h5>
           <p class="text-secondary">{{item.type}}</p>
         </div>
-      </div>
+      </a>
     </ng-container>
   </ng-container>
 </div>

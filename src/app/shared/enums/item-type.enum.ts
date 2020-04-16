@@ -1,5 +1,5 @@
 export enum ItemType {
-  'trench | jackets' = 1,
+  'trench | jackets',
   'blazers',
   'coats',
   'dresses | jumpsuits',
