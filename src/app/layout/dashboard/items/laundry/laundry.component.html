@@ -1,7 +1,8 @@
+<h4 class="mb-3">Items in Laundry</h4>
 <div class="d-flex flex-wrap">
   <ng-container class="col-6" *ngIf="itemsList && itemsList.length; else noItems">
     <ng-container *ngFor="let item of itemsList">
-      <a class="col-6 card" [routerLink]="item._id">
+      <a class="col-6 card" [routerLink]="'/dashboard/items/'+ item._id">
         <img [src]="envPath + item.photo" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{item.title}}</h5>
@@ -12,5 +13,6 @@
   </ng-container>
 </div>
 
-<ng-template #noItems>No items added</ng-template>
-<app-toast></app-toast>
+<ng-template #noItems>No items in this list</ng-template>
+
+

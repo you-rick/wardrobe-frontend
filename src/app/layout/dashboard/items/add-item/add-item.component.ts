@@ -66,7 +66,7 @@ export class AddItemComponent implements OnInit {
 
 
   fileChangeEvent(event: any): void {
-    if (event.target.files[0].size <= 500000) {
+    if (event.target.files[0].size <= 600000) {
       this.imageChangedEvent = event;
     } else {
       this.inputFile.nativeElement.value = "";
@@ -93,9 +93,8 @@ export class AddItemComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
 
-    if (this.itemPhoto) {
+    if (form.valid && this.itemPhoto) {
       form.value.photo = this.itemPhoto;
 
       if (this.edit) {
@@ -111,8 +110,8 @@ export class AddItemComponent implements OnInit {
           this.toastService.show('Item successfully saved!', {classname: 'bg-success text-light'});
         });
       }
-
-
+    } else {
+       this.toastService.show('Form is not valid. Please add required information', {classname: 'bg-danger text-light'});
     }
   }
 

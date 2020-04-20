@@ -18,10 +18,12 @@ export class ItemService {
   getItemList() {
     return this.http.get(this.baseURL);
   }
+  getLaundryList() {
+     return this.http.get(this.baseURL + '/laundry');
+  }
   getItemInfo(_id: string) {
     return this.http.get(this.baseURL + `/${_id}`);
   }
-
   postItem(item:Item) {
     return this.http.post(this.baseURL, item);
   }
