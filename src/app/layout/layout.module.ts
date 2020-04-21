@@ -7,7 +7,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SignInComponent} from "./auth/sign-in/sign-in.component";
 import {SignUpComponent} from "./auth/sign-up/sign-up.component";
 import {HomeComponent} from './home/home.component';
-import { TopBarComponent } from './shared/components/top-bar/top-bar.component';
+import { TopBarComponent } from '../shared/components/top-bar/top-bar.component';
 
 @NgModule({
   declarations: [

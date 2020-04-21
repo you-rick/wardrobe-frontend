@@ -29,8 +29,6 @@ export class AddItemComponent implements OnInit {
   public edit: boolean;
   public envPath = environment.API_URL;
 
-  toastAutohide = true;
-
   @ViewChild('inputFile', {static: true}) inputFile: ElementRef;
 
   constructor(
@@ -72,7 +70,6 @@ export class AddItemComponent implements OnInit {
       this.inputFile.nativeElement.value = "";
       this.toastService.show('File is too big', {classname: 'bg-danger text-light'});
     }
-
   }
 
   imageCropped(event: ImageCroppedEvent) {

@@ -1,0 +1,16 @@
+<div class="d-flex flex-wrap">
+  <ng-container class="col-6" *ngIf="collectionList && collectionList.length; else noItems">
+    <ng-container *ngFor="let item of collectionList">
+      <a class="col-6 card" [routerLink]="item._id">
+        <img [src]="envPath + item.photo" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="text-secondary">{{item.type}}</p>
+        </div>
+      </a>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noItems>No collections created</ng-template>
+<app-toast></app-toast>
