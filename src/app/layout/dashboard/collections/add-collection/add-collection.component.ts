@@ -31,6 +31,7 @@ export class AddCollectionComponent implements OnInit {
   public imageChangedEvent: any = '';
   public croppedImage: any = '';
   public edit: boolean;
+  public checkedItems: any[];
   public envPath = environment.API_URL;
 
   @ViewChild('inputFile', {static: true}) inputFile: ElementRef;
@@ -45,6 +46,12 @@ export class AddCollectionComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
+
+    if (this.route.snapshot.data.edit) {
+      this.fetchCollection();
+      this.edit = true;
+    }
+
     this.fetchItems();
   }
 
@@ -57,6 +64,16 @@ export class AddCollectionComponent implements OnInit {
     }
   }
 
+  fetchCollection() {
+    this.route.params.pipe(
+      switchMap(params => this.collectionService.getCollectionInfo(params.id))
+    ).subscribe((result: Collection) => {
+      this.newCollection = result;
+      this.checkedItems = result.items;
+      console.log(this.checkedItems);
+    });
+  }
+
   fetchItems() {
     this.itemService.getItemList().subscribe(items => {
       this.itemsList = items;
@@ -65,6 +82,7 @@ export class AddCollectionComponent implements OnInit {
 
   onItemSelect(value) {
     this.selectedItems = Object.keys(value).filter(key => !!value[key]);
+    console.log(this.selectedItems);
   }
 
   resetForm(form?: NgForm) {
@@ -94,13 +112,26 @@ export class AddCollectionComponent implements OnInit {
     form.value.items = this.selectedItems;
     console.log(form.value);
 
+    if (this.collectionPhoto) {
+      form.value.photo = this.collectionPhoto;
+    }
+
     if (form.valid) {
-      console.log("Valid!");
-      this.collectionService.postCollection(form.value).subscribe(res => {
-        console.log(res);
-        this.resetForm(form);
-        this.toastService.show('Collection successfully created!', {classname: 'bg-success text-light'});
-      });
+
+      if (this.edit) {
+        this.collectionService.putCollection(form.value).subscribe(res => {
+          console.log(res);
+          this.resetForm(form);
+          this.toastService.show('Collection successfully updated!', {classname: 'bg-success text-light'});
+        });
+      } else {
+        this.collectionService.postCollection(form.value).subscribe(res => {
+          console.log(res);
+          this.resetForm(form);
+          this.toastService.show('Collection successfully created!', {classname: 'bg-success text-light'});
+        });
+      }
+
     }
   }
 }

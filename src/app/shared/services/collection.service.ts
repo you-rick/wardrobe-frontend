@@ -24,4 +24,13 @@ export class CollectionService {
   postCollection(obj: Collection) {
     return this.http.post(this.baseURL, obj);
   }
+
+  putCollection(obj) {
+    console.log("url", this.baseURL + `/${obj._id}`);
+    return this.http.put(this.baseURL + `/${obj._id}`, obj);
+  }
+
+  deleteItem(_id: string) {
+    return this.http.delete(this.baseURL + `/${_id}`);
+  }
 }

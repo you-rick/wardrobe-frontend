@@ -1,0 +1,10 @@
+.media.item {
+  align-items: center;
+  img {
+    height: 40px;
+  }
+
+  & + .media {
+    margin-top: 10px;
+  }
+}

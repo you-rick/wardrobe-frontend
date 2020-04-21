@@ -1,11 +1,19 @@
 <div class="d-flex flex-wrap">
   <ng-container class="col-6" *ngIf="collectionList && collectionList.length; else noItems">
-    <ng-container *ngFor="let item of collectionList">
-      <a class="col-6 card" [routerLink]="item._id">
-        <img [src]="envPath + item.photo" class="card-img-top" alt="...">
+    <ng-container *ngFor="let coll of collectionList">
+      <a class="col-6 card" [routerLink]="coll._id">
+        <img *ngIf="!coll.items.length" [src]="envPath + coll.photo" class="card-img-top" alt="...">
+        <ng-container *ngIf="coll.items.length">
+          <div class="media panel item" *ngFor="let item of coll.items">
+            <img class="mr-3" [src]="envPath + item.photo" alt="{{item.title}}">
+            <div class="media-body">
+              <h5 class="mt-0">{{item.title}}</h5>
+            </div>
+          </div>
+        </ng-container>
         <div class="card-body">
-          <h5 class="card-title">{{item.title}}</h5>
-          <p class="text-secondary">{{item.type}}</p>
+          <h5 class="card-title">{{coll.title}}</h5>
+          <p class="text-secondary">{{coll.type}}</p>
         </div>
       </a>
     </ng-container>

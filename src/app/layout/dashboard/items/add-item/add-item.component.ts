@@ -95,14 +95,14 @@ export class AddItemComponent implements OnInit {
       form.value.photo = this.itemPhoto;
 
       if (this.edit) {
-        this.itemService.putItem(form.value).subscribe((response) => {
-          console.log(response);
+        this.itemService.putItem(form.value).subscribe(res => {
+          console.log(res);
           this.resetForm(form);
           this.toastService.show('Item successfully updated!', {classname: 'bg-success text-light'});
         });
       } else {
-        this.itemService.postItem(form.value).subscribe((response) => {
-          console.log(response);
+        this.itemService.postItem(form.value).subscribe(res => {
+          console.log(res);
           this.resetForm(form);
           this.toastService.show('Item successfully saved!', {classname: 'bg-success text-light'});
         });

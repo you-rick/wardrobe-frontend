@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import { map } from 'rxjs/operators';
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 import {environment} from "../../../environments/environment";
 import {Item} from "../models/item.model";
@@ -15,19 +13,25 @@ export class ItemService {
 
   constructor(private http: HttpClient) { }
 
-  getItemList() {
-    return this.http.get(this.baseURL);
+
+  getItemList(ids?: any) {
+   let headers = new HttpHeaders();
+   let params = new HttpParams().set("ids", ids || "");
+   return this.http.get(this.baseURL, {headers: headers, params: params});
   }
   getLaundryList() {
      return this.http.get(this.baseURL + '/laundry');
   }
   getItemInfo(_id: string) {
+    console.log("getItemInfo method");
     return this.http.get(this.baseURL + `/${_id}`);
   }
-  postItem(item:Item) {
+  postItem(item) {
+    console.log("Method");
     return this.http.post(this.baseURL, item);
   }
-  putItem(item:Item) {
+  putItem(item) {
+    console.log("url", this.baseURL + `/${item._id}`);
     return this.http.put(this.baseURL + `/${item._id}`, item);
   }
   deleteItem(_id: string) {

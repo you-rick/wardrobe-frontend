@@ -1,1 +1,30 @@
-<p>collection-info works!</p>
+<div class="container" *ngIf="selectedColl">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-between mb-4">
+      <h4>{{selectedColl.title}}</h4>
+      <nav class="btn-group">
+        <a [routerLink]="'edit'" class="btn btn-secondary btn-sm">Edit</a>
+        <button (click)="deleteItem()" class="btn btn-danger btn-sm">Delete</button>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+        <img *ngIf="!selectedColl.items.length" [src]="envPath + selectedColl.photo" class="card-img-top" alt="...">
+        <ng-container *ngIf="selectedColl.items.length">
+          <div class="media panel item" *ngFor="let item of selectedColl.items">
+            <img class="mr-3" [src]="envPath + item.photo" alt="{{item.title}}">
+            <div class="media-body">
+              <h5 class="mt-0">{{item.title}}</h5>
+            </div>
+          </div>
+        </ng-container>
+        <div class="card-body">
+          <p class="text-secondary">{{selectedColl.weather}}</p>
+          <p class="text-secondary">{{selectedColl.type}}</p>
+        </div>
+    </div>
+  </div>
+</div>
+
+

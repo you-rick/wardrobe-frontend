@@ -4,6 +4,6 @@ export class Collection {
   photo?: string;
   type?: any[];
   weather?: any[];
-  items?: string[];
+  items?: any[];
   userId?: string;
 }

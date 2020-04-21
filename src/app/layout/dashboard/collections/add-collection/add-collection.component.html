@@ -36,7 +36,7 @@
               [imageChangedEvent]="imageChangedEvent"
               [maintainAspectRatio]="true"
               [aspectRatio]="2 / 3"
-              [imageURL]="edit ? envPath + newCollection.photo : ''"
+              [imageURL]="edit ? (envPath + newCollection.photo) : ''"
               (imageCropped)="imageCropped($event)"
               (imageLoaded)="imageLoaded()"
               (cropperReady)="cropperReady()"
@@ -49,8 +49,8 @@
         <div class="col-14" *ngIf="itemsList && itemsList.length;  else noItems">
           <form #itemsForm="ngForm" (change)="onItemSelect(itemsForm.form.value)">
           <div class="item-list" *ngFor="let item of itemsList">
-            <li>
-              <input type="checkbox" ngModel [name]="item._id" [value]="item._id" [id]="item._id"/>
+            <li *ngIf="!item.washing">
+              <input type="checkbox" [name]="item._id" [id]="item._id" [ngModel]="checkedItems.indexOf(item._id) != -1"/>
               <label class="media" [for]="item._id">
                 <img class="mr-3" style="width: 60px;" [src]="envPath + item.photo" alt="{{item.title}}">
                 <div class="media-body">
