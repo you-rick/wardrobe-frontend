@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 
 import {CollectionService} from "../../../../shared/services/collection.service";
 import {ItemService} from "../../../../shared/services/item.service";
@@ -12,6 +12,7 @@ import {ToastService} from "../../../../shared/services/toast.service";
 })
 export class CollectionListComponent implements OnInit {
 
+  private historyState = window.history.state;
   public collectionList;
   public envPath = environment.API_URL;
 
@@ -19,17 +20,24 @@ export class CollectionListComponent implements OnInit {
     private collectionService: CollectionService,
     private toastService: ToastService,
     private itemService: ItemService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
+    if (this.historyState) {
+      this.historyState.collectionDeleted && this.toastService.show('Collection successfully removed!', {classname: 'bg-success text-light'});
+      this.historyState.collectionAdded && this.toastService.show('Collection successfully added!', {classname: 'bg-success text-light'});
+    }
+
     this.fetchCollections();
+
   }
 
   fetchCollections() {
-    this.collectionService.getCollectionList().subscribe((res:any[]) => {
+    this.collectionService.getCollectionList().subscribe((res: any[]) => {
       let collList = []
       res.forEach(el => {
-        if (el.photo.length) {
+        if (!el.items.length) {
           collList.push(el);
         } else {
           console.log(el.items);
@@ -42,5 +50,9 @@ export class CollectionListComponent implements OnInit {
       });
       this.collectionList = collList;
     });
+  }
+
+  ngOnDestroy() {
+    this.toastService.remove(this.toastService.toasts[0]);
   }
 }

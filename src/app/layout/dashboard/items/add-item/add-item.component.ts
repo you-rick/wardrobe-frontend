@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ImageCroppedEvent} from "ngx-image-cropper";
 
 import {Item} from "../../../../shared/models/item.model";
@@ -29,12 +29,11 @@ export class AddItemComponent implements OnInit {
   public edit: boolean;
   public envPath = environment.API_URL;
 
-  @ViewChild('inputFile', {static: true}) inputFile: ElementRef;
-
   constructor(
     private itemService: ItemService,
     public toastService: ToastService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -67,7 +66,7 @@ export class AddItemComponent implements OnInit {
     if (event.target.files[0].size <= 600000) {
       this.imageChangedEvent = event;
     } else {
-      this.inputFile.nativeElement.value = "";
+      event.target.value = "";
       this.toastService.show('File is too big', {classname: 'bg-danger text-light'});
     }
   }
@@ -94,21 +93,22 @@ export class AddItemComponent implements OnInit {
     if (form.valid && this.itemPhoto) {
       form.value.photo = this.itemPhoto;
 
+      console.log(form.value._id);
+
       if (this.edit) {
         this.itemService.putItem(form.value).subscribe(res => {
-          console.log(res);
+          let itmId = form.value._id;
           this.resetForm(form);
-          this.toastService.show('Item successfully updated!', {classname: 'bg-success text-light'});
+          this.router.navigateByUrl('/dashboard/items/' + itmId, {state: {'itemUpdated': true}});
         });
       } else {
         this.itemService.postItem(form.value).subscribe(res => {
-          console.log(res);
           this.resetForm(form);
-          this.toastService.show('Item successfully saved!', {classname: 'bg-success text-light'});
+          this.router.navigateByUrl('/dashboard/items', {state: {'itemAdded': true}});
         });
       }
     } else {
-       this.toastService.show('Form is not valid. Please add required information', {classname: 'bg-danger text-light'});
+      this.toastService.show('Form is not valid. Please add required information', {classname: 'bg-danger text-light'});
     }
   }
 

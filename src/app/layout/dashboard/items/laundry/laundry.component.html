@@ -1,4 +1,7 @@
-<h4 class="mb-3">Items in Laundry</h4>
+<div class="d-flex justify-content-between mb-5">
+  <h4>Items in Laundry</h4>
+  <button class="btn btn-primary" (click)="clearLaundry()">Clear Laundry</button>
+</div>
 <div class="d-flex flex-wrap">
   <ng-container class="col-6" *ngIf="itemsList && itemsList.length; else noItems">
     <ng-container *ngFor="let item of itemsList">
@@ -15,4 +18,4 @@
 
 <ng-template #noItems>No items in this list</ng-template>
 
-
+<app-toast></app-toast>

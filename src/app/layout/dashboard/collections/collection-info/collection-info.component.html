@@ -10,21 +10,24 @@
   </div>
   <div class="row">
     <div class="col-12">
-        <img *ngIf="!selectedColl.items.length" [src]="envPath + selectedColl.photo" class="card-img-top" alt="...">
-        <ng-container *ngIf="selectedColl.items.length">
-          <div class="media panel item" *ngFor="let item of selectedColl.items">
+      <img *ngIf="selectedColl.photo" [src]="envPath + selectedColl.photo" class="card-img-top" alt="...">
+      <ng-container *ngIf="selectedColl.items?.length">
+        <ng-container *ngFor="let item of selectedColl.items">
+          <div class="media panel item" [ngClass]="{'bg-light-red' : item.washing}">
             <img class="mr-3" [src]="envPath + item.photo" alt="{{item.title}}">
             <div class="media-body">
               <h5 class="mt-0">{{item.title}}</h5>
             </div>
           </div>
         </ng-container>
-        <div class="card-body">
-          <p class="text-secondary">{{selectedColl.weather}}</p>
-          <p class="text-secondary">{{selectedColl.type}}</p>
-        </div>
+
+      </ng-container>
+      <div class="card-body">
+        <p class="text-secondary">{{selectedColl.weather}}</p>
+        <p class="text-secondary">{{selectedColl.type}}</p>
+      </div>
     </div>
   </div>
 </div>
 
-
+<app-toast></app-toast>

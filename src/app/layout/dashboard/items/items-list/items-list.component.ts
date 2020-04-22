@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 
 import {ItemService} from "../../../../shared/services/item.service";
@@ -13,6 +13,7 @@ import {ToastService} from "../../../../shared/services/toast.service";
 export class ItemsListComponent implements OnInit {
   public itemsList;
   public envPath = environment.API_URL;
+  private historyState = window.history.state;
 
 
   constructor(
@@ -25,8 +26,9 @@ export class ItemsListComponent implements OnInit {
   ngOnInit() {
     this.fetchItems();
 
-    if (window.history.state && window.history.state.itemDeleted) {
-      this.toastService.show('Item successfully removed!', {classname: 'bg-success text-light'});
+    if (this.historyState) {
+      this.historyState.itemDeleted && this.toastService.show('Item successfully removed!', {classname: 'bg-success text-light'});
+      this.historyState.itemAdded && this.toastService.show('Item successfully added!', {classname: 'bg-success text-light'});
     }
   }
 
@@ -38,6 +40,10 @@ export class ItemsListComponent implements OnInit {
       err => {
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.toastService.remove(this.toastService.toasts[0]);
   }
 
 }

@@ -3,6 +3,7 @@
     <div class="col-12 d-flex justify-content-between mb-4">
       <h4>{{selectedItem.title}}</h4>
       <nav class="btn-group">
+        <button *ngIf="selectedItem.washing" class="btn-warning" (click)="clearLaundry()">Laundry off</button>
         <a [routerLink]="'edit'" class="btn btn-secondary btn-sm">Edit</a>
         <button (click)="deleteItem()" class="btn btn-danger btn-sm">Delete</button>
       </nav>
@@ -18,4 +19,4 @@
   </div>
 </div>
 
-
+<app-toast></app-toast>
