@@ -1,7 +1,6 @@
-export class Collection {
+export class Outfit {
   _id?: string;
   title: string;
-  photo?: string;
   type?: any[];
   weather?: any[];
   items?: any[];

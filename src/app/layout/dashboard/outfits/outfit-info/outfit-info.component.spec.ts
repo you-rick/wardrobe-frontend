@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CollectionInfoComponent } from './collection-info.component';
+import { OutfitInfoComponent } from './outfit-info.component';
 
-describe('CollectionInfoComponent', () => {
-  let component: CollectionInfoComponent;
-  let fixture: ComponentFixture<CollectionInfoComponent>;
+describe('OutfitInfoComponent', () => {
+  let component: OutfitInfoComponent;
+  let fixture: ComponentFixture<OutfitInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CollectionInfoComponent ]
+      declarations: [ OutfitInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CollectionInfoComponent);
+    fixture = TestBed.createComponent(OutfitInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,46 +1,32 @@
 <div class="row">
   <div class="col-24">
     <div class="panel card p-3">
-      <h3 class="mb-3" *ngIf="edit">Edit new collection</h3>
-      <h3 class="mb-3" *ngIf="!edit">Create new collection</h3>
+      <h3 class="mb-3" *ngIf="edit">Edit new outfit</h3>
+      <h3 class="mb-3" *ngIf="!edit">Create new outfit</h3>
 
       <div class="row">
         <div class="col-10">
-          <form #collectionForm="ngForm" (ngSubmit)="onSubmit(collectionForm)">
-            <input *ngIf="edit" [ngModel]="newCollection._id" name="_id" type="hidden">
+          <form #outfitForm="ngForm" (ngSubmit)="onSubmit(outfitForm)">
+            <input *ngIf="edit" [ngModel]="newOutfit._id" name="_id" type="hidden">
             <div class="form-group">
               <label>Item Name</label>
-              <input type="text" class="form-control" name="title" [ngModel]="newCollection.title"
+              <input type="text" class="form-control" name="title" [ngModel]="newOutfit.title"
                      placeholder="Enter item name" required>
             </div>
             <div class="form-group">
-              <label>Item Photo</label>
-              <input type="file" class="form-control" name="file" (change)="fileChangeEvent($event)"/>
-              <input type="hidden" name="photo">
-            </div>
-            <div class="form-group">
               <label>Item Category</label>
-              <select name="type" [ngModel]="newCollection.type" class="form-control" required>
-                <option *ngFor="let itemT of collectionTypes | enumToArray" [value]="itemT">{{itemT}}</option>
+              <select name="type" [ngModel]="newOutfit.type" class="form-control" required>
+                <option>Choose category</option>
+                <option *ngFor="let itemT of outfitTypes | enumToArray" [value]="itemT">{{itemT}}</option>
               </select>
             </div>
             <div class="form-group">
               <label>Weather Type</label>
-              <select name="weather" [ngModel]="newCollection.weather" class="form-control" required>
-                <option *ngFor="let itemW of collectionWeather | enumToArray" [value]="itemW">{{itemW}}</option>
+              <select name="weather" [ngModel]="newOutfit.weather" class="form-control" required>
+                <option>Choose type</option>
+                <option *ngFor="let itemW of outfitWeather | enumToArray" [value]="itemW">{{itemW}}</option>
               </select>
             </div>
-
-            <image-cropper
-              [imageChangedEvent]="imageChangedEvent"
-              [maintainAspectRatio]="true"
-              [aspectRatio]="2 / 3"
-              [imageURL]="edit ? (envPath + newCollection.photo) : ''"
-              (imageCropped)="imageCropped($event)"
-              (imageLoaded)="imageLoaded()"
-              (cropperReady)="cropperReady()"
-              (loadImageFailed)="loadImageFailed()"
-            ></image-cropper>
 
             <button type="submit" class="btn btn-primary">Save</button>
           </form>

@@ -2,35 +2,34 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 import {environment} from "../../../environments/environment";
-import {Collection} from "../models/collection.model";
+import {Outfit} from "../models/outfit.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CollectionService {
-  readonly baseURL = environment.API_URL + 'collections';
+export class OutfitService {
+  readonly baseURL = environment.API_URL + 'outfits';
 
   constructor(private http: HttpClient) {
   }
 
-  getCollectionList() {
+  getOutfitList() {
     return this.http.get(this.baseURL);
   }
 
-  getCollectionInfo(_id: string) {
+  getOutfitInfo(_id: string) {
     return this.http.get(this.baseURL + `/${_id}`);
   }
 
-  postCollection(obj: Collection) {
+  postOutfit(obj: Outfit) {
     return this.http.post(this.baseURL, obj);
   }
 
-  putCollection(obj) {
-    console.log("url", this.baseURL + `/${obj._id}`);
+  putOutfit(obj) {
     return this.http.put(this.baseURL + `/${obj._id}`, obj);
   }
 
-  deleteItem(_id: string) {
+  deleteOutfit(_id: string) {
     return this.http.delete(this.baseURL + `/${_id}`);
   }
 }

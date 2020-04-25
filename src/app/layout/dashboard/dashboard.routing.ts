@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '', component: DashboardComponent, children: [
       {path: 'profile', component: ProfileComponent},
       {path: 'items', loadChildren: () => import('./items/items.module').then(m => m.ItemsModule)},
-      {path: 'collections', loadChildren: () => import('./collections/collections.module').then(m => m.CollectionsModule)}
+      {path: 'outfits', loadChildren: () => import('./outfits/outfits.module').then(m => m.OutfitsModule)}
     ]
   },
 
