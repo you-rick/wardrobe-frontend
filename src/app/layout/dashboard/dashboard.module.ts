@@ -4,6 +4,7 @@ import {DashboardRouting} from "./dashboard.routing";
 import {DashboardComponent} from "./dashboard.component";
 import {ProfileComponent} from "./profile/profile.component";
 import { LeftNavComponent } from './shared/left-nav/left-nav.component';
+import {ItemsSharedModule} from "./items/items-shared.module";
 import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
@@ -11,6 +12,7 @@ import {SharedModule} from "../../shared/shared.module";
   imports: [
     CommonModule,
     DashboardRouting,
+    ItemsSharedModule,
     SharedModule
   ]
 })

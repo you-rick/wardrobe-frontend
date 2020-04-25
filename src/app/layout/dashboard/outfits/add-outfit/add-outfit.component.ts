@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AddItemComponent} from "../../items/add-item/add-item.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 
@@ -30,6 +32,7 @@ export class AddOutfitComponent implements OnInit {
   constructor(
     private outfitService: OutfitService,
     private itemService: ItemService,
+    private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -66,6 +69,11 @@ export class AddOutfitComponent implements OnInit {
   onItemSelect(value) {
     this.selectedItems = Object.keys(value).filter(key => !!value[key]);
     console.log(this.selectedItems);
+  }
+
+  showAddItemForm() {
+    const modalRef = this.modalService.open(AddItemComponent);
+    modalRef.componentInstance.isModal = true;
   }
 
   resetForm(form?: NgForm) {

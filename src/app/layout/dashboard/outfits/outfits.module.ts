@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {FormsModule} from "@angular/forms";
 import {ImageCropperModule} from "ngx-image-cropper";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {ItemsSharedModule} from "../items/items-shared.module";
 import {SharedModule} from "../../../shared/shared.module";
 
 
@@ -25,6 +26,7 @@ import { AddOutfitComponent } from './add-outfit/add-outfit.component';
     ImageCropperModule,
     NgbModule,
     OutfitsRouting,
+    ItemsSharedModule,
     SharedModule
   ]
 })

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-10" *ngIf="newItem">
+  <div [ngClass]="{'col-10': !isModal, 'col-24': isModal}" *ngIf="newItem">
     <div class="panel card p-3">
       <h3 class="mb-3" *ngIf="edit">Edit new item</h3>
       <h3 class="mb-3" *ngIf="!edit">Add new item</h3>

@@ -4,52 +4,82 @@
       <h3 class="mb-3" *ngIf="edit">Edit new outfit</h3>
       <h3 class="mb-3" *ngIf="!edit">Create new outfit</h3>
 
+
       <div class="row">
-        <div class="col-10">
-          <form #outfitForm="ngForm" (ngSubmit)="onSubmit(outfitForm)">
-            <input *ngIf="edit" [ngModel]="newOutfit._id" name="_id" type="hidden">
-            <div class="form-group">
-              <label>Item Name</label>
-              <input type="text" class="form-control" name="title" [ngModel]="newOutfit.title"
-                     placeholder="Enter item name" required>
-            </div>
-            <div class="form-group">
-              <label>Item Category</label>
-              <select name="type" [ngModel]="newOutfit.type" class="form-control" required>
-                <option>Choose category</option>
-                <option *ngFor="let itemT of outfitTypes | enumToArray" [value]="itemT">{{itemT}}</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Weather Type</label>
-              <select name="weather" [ngModel]="newOutfit.weather" class="form-control" required>
-                <option>Choose type</option>
-                <option *ngFor="let itemW of outfitWeather | enumToArray" [value]="itemW">{{itemW}}</option>
-              </select>
-            </div>
+        <div class="col-14">
+          <ul ngbNav #nav="ngbNav" class="nav-tabs">
+            <li ngbNavItem>
+              <a ngbNavLink>Add Items</a>
+              <ng-template ngbNavContent>
+                <div class="d-flex mt-4">
+                  <button class="btn btn-sm btn-secondary" (click)="showAddItemForm()">Add New Item</button>
+                  <span class="ml-3 mr-3">OR</span>
+                  <span class="w-50">
+                     <select name="type" [ngModel]="newOutfit.type || '0'" class="form-control" required>
+                      <option value="0">Select by category</option>
+                      <option *ngFor="let itemT of outfitTypes | enumToArray" [value]="itemT">{{itemT}}</option>
+                    </select>
+                  </span>
 
-            <button type="submit" class="btn btn-primary">Save</button>
-          </form>
-        </div>
-        <div class="col-14" *ngIf="itemsList && itemsList.length;  else noItems">
-          <form #itemsForm="ngForm" (change)="onItemSelect(itemsForm.form.value)">
-          <div class="item-list" *ngFor="let item of itemsList">
-            <li *ngIf="!item.washing">
-
-              <input type="checkbox" *ngIf="edit" [name]="item._id" [id]="item._id" [ngModel]="checkedItems.indexOf(item._id) != -1"/>
-              <input type="checkbox" *ngIf="!edit" [name]="item._id" [id]="item._id" ngModel/>
-              <label class="media" [for]="item._id">
-                <img class="mr-3" style="width: 60px;" [src]="envPath + item.photo" alt="{{item.title}}">
-                <div class="media-body">
-                  <h6 class="mt-0">{{item.title}}</h6>
-                  <p class="text-secondary">
-                    {{item.type}},  {{item.weather}}
-                  </p>
                 </div>
-              </label>
+
+
+                <!--
+                <div *ngIf="itemsList && itemsList.length;  else noItems">
+                  <form #itemsForm="ngForm" (change)="onItemSelect(itemsForm.form.value)">
+                    <ul class="item-list" *ngFor="let item of itemsList">
+                      <li *ngIf="!item.washing">
+
+                        <input type="checkbox" *ngIf="edit" [name]="item._id" [id]="item._id"
+                               [ngModel]="checkedItems.indexOf(item._id) != -1"/>
+                        <input type="checkbox" *ngIf="!edit" [name]="item._id" [id]="item._id" ngModel/>
+                        <label class="media" [for]="item._id">
+                          <img class="mr-3" style="width: 60px;" [src]="envPath + item.photo" alt="{{item.title}}">
+                          <div class="media-body">
+                            <h6 class="mt-0">{{item.title}}</h6>
+                            <p class="text-secondary">
+                              {{item.type}},  {{item.weather}}
+                            </p>
+                          </div>
+                        </label>
+                      </li>
+                    </ul>
+                  </form>
+                </div>
+                -->
+              </ng-template>
             </li>
-          </div>
-          </form>
+            <li ngbNavItem>
+              <a ngbNavLink>Outfit Details</a>
+              <ng-template ngbNavContent>
+                <form #outfitForm="ngForm" (ngSubmit)="onSubmit(outfitForm)">
+                  <input *ngIf="edit" [ngModel]="newOutfit._id" name="_id" type="hidden">
+                  <div class="form-group">
+                    <label>Item Name</label>
+                    <input type="text" class="form-control" name="title" [ngModel]="newOutfit.title"
+                           placeholder="Enter item name" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Item Category</label>
+                    <select name="type" [ngModel]="newOutfit.type" class="form-control" required>
+                      <option>Choose category</option>
+                      <option *ngFor="let itemT of outfitTypes | enumToArray" [value]="itemT">{{itemT}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Weather Type</label>
+                    <select name="weather" [ngModel]="newOutfit.weather" class="form-control" required>
+                      <option>Choose type</option>
+                      <option *ngFor="let itemW of outfitWeather | enumToArray" [value]="itemW">{{itemW}}</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="nav"></div>
         </div>
       </div>
     </div>

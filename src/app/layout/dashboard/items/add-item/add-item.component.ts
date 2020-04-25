@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ImageCroppedEvent} from "ngx-image-cropper";
@@ -20,6 +20,9 @@ import {environment} from "../../../../../environments/environment";
   styleUrls: ['./add-item.component.scss']
 })
 export class AddItemComponent implements OnInit {
+  @Input() isModal: boolean;
+  @Output() submitForm: EventEmitter<Item> = new EventEmitter();
+
   public newItem: Item;
   public itemTypes = ItemType;
   public itemWeather = ItemWeather;
