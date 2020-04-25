@@ -21,7 +21,7 @@ import {environment} from "../../../../../environments/environment";
 })
 export class AddItemComponent implements OnInit {
   @Input() isModal: boolean;
-  @Output() submitForm: EventEmitter<Item> = new EventEmitter();
+  @Output() submitFormEvent: EventEmitter<Item> = new EventEmitter();
 
   public newItem: Item;
   public itemTypes = ItemType;
@@ -96,8 +96,6 @@ export class AddItemComponent implements OnInit {
     if (form.valid && this.itemPhoto) {
       form.value.photo = this.itemPhoto;
 
-      console.log(form.value._id);
-
       if (this.edit) {
         this.itemService.putItem(form.value).subscribe(res => {
           let itmId = form.value._id;
@@ -105,9 +103,13 @@ export class AddItemComponent implements OnInit {
           this.router.navigateByUrl('/dashboard/items/' + itmId, {state: {'itemUpdated': true}});
         });
       } else {
-        this.itemService.postItem(form.value).subscribe(res => {
+        this.itemService.postItem(form.value).subscribe((res:Item) => {
           this.resetForm(form);
-          this.router.navigateByUrl('/dashboard/items', {state: {'itemAdded': true}});
+          if (this.isModal) {
+            this.submitFormEvent.emit(res);
+          } else {
+            this.router.navigateByUrl('/dashboard/items', {state: {'itemAdded': true}});
+          }
         });
       }
     } else {

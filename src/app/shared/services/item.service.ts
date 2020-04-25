@@ -30,6 +30,13 @@ export class ItemService {
     return this.http.get(this.baseURL + '/laundry');
   }
 
+
+  getItemListByType(type) {
+    let headers = new HttpHeaders();
+    let params = new HttpParams().set("type", type);
+    return this.http.get(this.baseURL + '/type', {headers: headers, params: params});
+  }
+
   updateLaundryList(washing, ids?: any) {
     if (ids) {
       let headers = new HttpHeaders();
