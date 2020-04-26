@@ -13,8 +13,14 @@ export class OutfitService {
   constructor(private http: HttpClient) {
   }
 
-  getOutfitList() {
-    return this.http.get(this.baseURL);
+  getOutfitList(id?: any) {
+    if (id) {
+      let headers = new HttpHeaders();
+      let params = new HttpParams().set("id", id);
+      return this.http.get(this.baseURL, {headers: headers, params: params});
+    } else {
+      return this.http.get(this.baseURL);
+    }
   }
 
   getOutfitInfo(_id: string) {

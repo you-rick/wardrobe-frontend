@@ -23,7 +23,6 @@ export class ItemService {
     } else {
       return this.http.get(this.baseURL);
     }
-
   }
 
   getLaundryList() {

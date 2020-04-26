@@ -9,12 +9,19 @@
     height: 90px;
   }
 
+  .img-removed {
+    width: 60px;
+    height: 90px;
+    margin-right: 1rem;
+    background: rgba(255,0,0,0.15);
+  }
+
   & + .media {
     margin-top: 10px;
   }
 
-  &.bg-light-red {
-    background: rgba(255,0,0,0.1);
+  &.bg-laundry {
+    background: rgba(255, 193, 7, 0.2);
   }
 }
 

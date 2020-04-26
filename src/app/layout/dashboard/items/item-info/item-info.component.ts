@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 import {ItemService} from "../../../../shared/services/item.service";
 import {Item} from "../../../../shared/models/item.model";
+import {OutfitService} from "../../../../shared/services/outfit.service";
+import {Outfit} from "../../../../shared/models/outfit.model";
 import {environment} from "../../../../../environments/environment";
 import {switchMap} from "rxjs/operators";
 import {ToastService} from "../../../../shared/services/toast.service";
@@ -17,13 +19,15 @@ export class ItemInfoComponent implements OnInit {
 
   private historyState = window.history.state;
   public selectedItem: Item;
+  public outfitsWithItem: Outfit[];
   public envPath = environment.API_URL;
 
   constructor(
     private itemService: ItemService,
+    private outfitService: OutfitService,
     private toastService: ToastService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {
   }
 
@@ -41,13 +45,22 @@ export class ItemInfoComponent implements OnInit {
     ).subscribe((result: Item) => {
       console.log(result);
       this.selectedItem = result;
+      this.getOutfitsWithItem();
     });
   }
 
-  clearLaundry() {
-    this.selectedItem.washing = false;
+  getOutfitsWithItem() {
+    this.outfitService.getOutfitList(this.selectedItem._id).subscribe((outfits: Outfit[]) => {
+      this.outfitsWithItem = outfits;
+    });
+  }
+
+  toggleLaundry() {
     console.log(this.selectedItem);
-    this.itemService.updateLaundryList(false, this.selectedItem._id).subscribe(res => {
+    this.itemService.updateLaundryList(!this.selectedItem.washing, this.selectedItem._id).subscribe((res:any) => {
+      if (res.ok) {
+        this.selectedItem.washing = !this.selectedItem.washing;
+      }
       this.toastService.show('Item successfully updated!', {classname: 'bg-success text-light'});
     });
   }

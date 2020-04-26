@@ -11,7 +11,42 @@
       align-items: center;
       margin-left: 10px;
       flex-grow: 1;
-      cursor:  pointer;
+      cursor: pointer;
     }
   }
+}
+
+::ng-deep {
+  .outfit-form-wrapper {
+    .carousel-control-prev, .carousel-control-next {
+      opacity: 0.75;
+      background: rgba(0,0,0,0.05);
+    }
+    .carousel-control-next-icon {
+      background: none;
+
+      &:before {
+        content: "\f054";
+        font-family: "FontAwesome";
+      }
+    }
+
+    .carousel-control-prev-icon {
+      background: none;
+
+      &:before {
+        content: "\f053";
+        font-family: "FontAwesome";
+      }
+    }
+  }
+}
+
+
+.zoom-slider {
+  width: 50%;
+}
+
+.sliders-wrapper {
+  transform-origin: top left;
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {NgForm} from "@angular/forms";
+import {Options} from 'ng5-slider';
 import {NgbModal, NgbCarousel, NgbCarouselConfig, NgbNavConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddItemComponent} from "../../items/add-item/add-item.component";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -34,6 +35,13 @@ export class AddOutfitComponent implements OnInit {
   public checkedItems: any[];
   public envPath = environment.API_URL;
   public slides: any[] = [];
+  public zoomRangeValue:number = 1;
+  public zoomRangeOptions: Options = {
+    floor: 0.5,
+    ceil: 1,
+    step: 0.1,
+    showTicks: true
+  }
 
   constructor(
     private outfitService: OutfitService,
@@ -62,9 +70,9 @@ export class AddOutfitComponent implements OnInit {
   fetchOutfit() {
     this.route.params.pipe(
       switchMap(params => this.outfitService.getOutfitInfo(params.id)),
-      tap((outfit:Outfit) => this.newOutfit = outfit),
+      tap((outfit: Outfit) => this.newOutfit = outfit),
       switchMap(outfit => this.itemService.getItemList(outfit.items))
-    ).subscribe((items:Item[]) => {
+    ).subscribe((items: Item[]) => {
 
       items.forEach(item => {
         let obj = {

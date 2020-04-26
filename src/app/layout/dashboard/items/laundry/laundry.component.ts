@@ -35,7 +35,7 @@ export class LaundryComponent implements OnInit {
     if (this.itemsList) {
       this.itemService.updateLaundryList(false).subscribe(res => {
         this.itemsList = null;
-        this.toastService.show('Laundry successfully!', {classname: 'bg-success text-light'});
+        this.toastService.show('Laundry successfully cleared!', {classname: 'bg-success text-light'});
       });
     }
   }

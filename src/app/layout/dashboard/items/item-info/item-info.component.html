@@ -1,20 +1,27 @@
-<div class="container" *ngIf="selectedItem">
+<div *ngIf="selectedItem">
   <div class="row">
-    <div class="col-12 d-flex justify-content-between mb-4">
+    <div class="col-14 d-flex justify-content-between mb-4">
       <h4>{{selectedItem.title}}</h4>
       <nav class="btn-group">
-        <button *ngIf="selectedItem.washing" class="btn-warning" (click)="clearLaundry()">Laundry off</button>
+        <button class=" btn btn-warning" (click)="toggleLaundry()">
+          <span *ngIf="selectedItem.washing">Item washed</span>
+          <span *ngIf="!selectedItem.washing">Put in laundry</span>
+        </button>
         <a [routerLink]="'edit'" class="btn btn-secondary btn-sm">Edit</a>
         <button (click)="deleteItem()" class="btn btn-danger btn-sm">Delete</button>
       </nav>
     </div>
   </div>
   <div class="row">
-    <div class="col-6">
+    <div class="col-5">
       <img [src]="envPath + selectedItem.photo"/>
+        <p>{{selectedItem.type}},  {{selectedItem.weather}}</p>
     </div>
-    <div class="col-6">
-      <p>{{selectedItem.type}},  {{selectedItem.weather}}</p>
+    <div class="col-8" *ngIf="outfitsWithItem && outfitsWithItem.length">
+      <h5 class="mb-3">This item is part of following outfits:</h5>
+      <ul *ngFor="let outfit of outfitsWithItem">
+        <li><a [routerLink]="'/dashboard/outfits/'+ outfit._id">{{outfit.title}}</a></li>
+      </ul>
     </div>
   </div>
 </div>

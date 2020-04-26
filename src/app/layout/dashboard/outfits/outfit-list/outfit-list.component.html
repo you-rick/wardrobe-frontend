@@ -1,18 +1,14 @@
-<div class="d-flex flex-wrap">
-  <ng-container class="col-6" *ngIf="outfitList && outfitList.length; else noItems">
+<div class="outfits-grid">
+  <ng-container *ngIf="outfitList && outfitList.length; else noItems">
     <ng-container *ngFor="let outfit of outfitList">
-      <a class="col-6 card" [routerLink]="outfit._id">
-        <ng-container *ngIf="outfit.items">
+      <a class="outfit" [routerLink]="outfit._id">
+        <div *ngIf="outfit.items" class="images-box images-box_{{outfit.items.length}}">
           <ng-container *ngFor="let item of outfit.items">
-            <div class="media panel item" [ngClass]="{'bg-light-red' : item.washing}">
-              <img class="mr-3" [src]="envPath + item.photo" alt="{{item.title}}">
-              <div class="media-body">
-                <p class="m-0 text-secondary">{{item.title}}</p>
-              </div>
-            </div>
+            <div class="pic" *ngIf="item?.photo" [ngStyle]="{'background-image': 'url('+ envPath + item.photo +')'}"></div>
+            <div class="pic deleted" *ngIf="!item?.photo">Item removed</div>
           </ng-container>
 
-        </ng-container>
+        </div>
         <div class="card-body">
           <h5 class="card-title">{{outfit.title}}</h5>
           <p class="text-secondary">{{outfit.type}}</p>

@@ -5,6 +5,7 @@ import {ImageCropperModule} from "ngx-image-cropper";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {ItemsSharedModule} from "../items/items-shared.module";
 import {SharedModule} from "../../../shared/shared.module";
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 import {OutfitsRouting} from "./outfits.routing";
@@ -27,7 +28,8 @@ import { AddOutfitComponent } from './add-outfit/add-outfit.component';
     NgbModule,
     OutfitsRouting,
     ItemsSharedModule,
-    SharedModule
+    SharedModule,
+    Ng5SliderModule
   ]
 })
 export class OutfitsModule { }

@@ -1,4 +1,4 @@
-<div class="container" *ngIf="selectedOutfit">
+<div *ngIf="selectedOutfit">
   <div class="row">
     <div class="col-12 d-flex justify-content-between mb-4">
       <h4>{{selectedOutfit.title}}</h4>
@@ -12,10 +12,16 @@
     <div class="col-12">
        <ng-container *ngIf="selectedOutfit.items?.length">
         <ng-container *ngFor="let item of selectedOutfit.items">
-          <div class="media panel item" [ngClass]="{'bg-light-red' : item.washing}">
+          <div *ngIf="item" class="media panel item" [ngClass]="{'bg-laundry' : item.washing}">
             <img class="mr-3" [src]="envPath + item.photo" alt="{{item.title}}">
             <div class="media-body">
               <h6 class="m-0 text-secondary">{{item.title}}</h6>
+            </div>
+          </div>
+          <div *ngIf="!item" class="media panel item removed">
+            <span class="img-removed"></span>
+            <div class="media-body">
+              <p>Item Removed</p>
             </div>
           </div>
         </ng-container>

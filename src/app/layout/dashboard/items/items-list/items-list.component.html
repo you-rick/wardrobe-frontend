@@ -1,10 +1,12 @@
-<div class="d-flex flex-wrap">
-  <ng-container class="col-6" *ngIf="itemsList && itemsList.length; else noItems">
+<div class="items-grid">
+  <ng-container *ngIf="itemsList && itemsList.length; else noItems">
     <ng-container *ngFor="let item of itemsList">
-      <a class="col-6 card" [routerLink]="item._id">
-        <img [src]="envPath + item.photo" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{item.title}}</h5>
+      <a class="item-box" [routerLink]="item._id">
+        <div class="item-photo">
+          <img [src]="envPath + item.photo" alt="...">
+        </div>
+        <div class="item-body">
+          <h5 class="title">{{item.title}}</h5>
           <p class="text-secondary">{{item.type}}</p>
         </div>
       </a>

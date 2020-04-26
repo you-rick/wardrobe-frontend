@@ -42,10 +42,16 @@ export class OutfitInfoComponent implements OnInit {
     this.route.params.pipe(
       switchMap(params => this.outfitService.getOutfitInfo(params.id))
     ).subscribe((outfit: Outfit) => {
-      console.log(outfit);
+      let outfitItemsLength = outfit.items.length;
       if (outfit.items.length) {
-        this.itemService.getItemList(outfit.items).subscribe((result: any) => {
-          outfit.items = result;
+        this.itemService.getItemList(outfit.items).subscribe((items: Item[]) => {
+          if (items.length == outfitItemsLength) {
+             outfit.items = items;
+          } else {
+            let removedItems = new Array(outfitItemsLength - items.length);
+            outfit.items = items.concat(removedItems);
+          }
+
         });
       }
 

@@ -5,6 +5,8 @@ import {ItemService} from "../../../../shared/services/item.service";
 import {environment} from "../../../../../environments/environment";
 import {ToastService} from "../../../../shared/services/toast.service";
 
+import {Item} from "../../../../shared/models/item.model";
+
 @Component({
   selector: 'app-outfit-list',
   templateUrl: './outfit-list.component.html',
@@ -40,10 +42,19 @@ export class OutfitListComponent implements OnInit {
         if (!el.items.length) {
           outfitList.push(el);
         } else {
-          this.itemService.getItemList(el.items).subscribe(result => {
-            console.log(result);
-            el.items = result;
+          let outfitItemsLength = el.items.length;
+          this.itemService.getItemList(el.items).subscribe((items: Item[]) => {
+            if (items.length == outfitItemsLength) {
+              el.items = items;
+
+            } else {
+              let removedItems = new Array(outfitItemsLength - items.length);
+              el.items = items;
+              el.items = el.items.concat(removedItems);
+            }
             outfitList.push(el);
+            console.log(el.items);
+
           });
         }
       });
