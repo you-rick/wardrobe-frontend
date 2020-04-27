@@ -35,7 +35,7 @@ export class AddOutfitComponent implements OnInit {
   public checkedItems: any[];
   public envPath = environment.API_URL;
   public slides: any[] = [];
-  public zoomRangeValue:number = 1;
+  public zoomRangeValue: number = 1;
   public zoomRangeOptions: Options = {
     floor: 0.5,
     ceil: 1,
@@ -94,18 +94,17 @@ export class AddOutfitComponent implements OnInit {
     });
   }
 
-  /*
-  onItemSelect(value) {
-    this.selectedItems = Object.keys(value).filter(key => !!value[key]);
-    console.log(this.selectedItems);
+  removeSlider(id) {
+    this.slides.splice(id, 1);
+    console.log(id);
   }
-  */
 
   showAddItemForm() {
     const modalRef = this.modalService.open(AddItemComponent);
     modalRef.componentInstance.isModal = true;
     modalRef.componentInstance.submitFormEvent.subscribe((item: Item) => {
       if (item) {
+        this.toastService.show('Item successfully added', {classname: 'bg-success text-light'});
         this.getImagesByItemType(item.type, item._id);
         modalRef.close();
       }

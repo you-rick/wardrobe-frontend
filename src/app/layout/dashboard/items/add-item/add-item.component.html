@@ -1,49 +1,57 @@
 <div class="row">
-  <div [ngClass]="{'col-10': !isModal, 'col-24': isModal}" *ngIf="newItem">
+  <div [ngClass]="{'col-20': !isModal, 'col-24': isModal}" *ngIf="newItem">
     <div class="panel card p-3">
       <h3 class="mb-3" *ngIf="edit">Edit new item</h3>
       <h3 class="mb-3" *ngIf="!edit">Add new item</h3>
-      <form #itemForm="ngForm" (ngSubmit)="onSubmit(itemForm)">
-        <input *ngIf="edit" [ngModel]="newItem._id" name="_id" type="hidden">
-        <div class="form-group">
-          <label>Item Name</label>
-          <input type="text" class="form-control" name="title" [ngModel]="newItem.title" placeholder="Enter item name" required>
-        </div>
-        <div class="form-group">
-          <label>Item Photo</label>
-          <input type="file" class="form-control" name="file" (change)="fileChangeEvent($event)"/>
-          <input type="hidden" name="photo">
-        </div>
-        <div class="form-group">
-          <label>Item Category</label>
-          <select name="type" [ngModel]="newItem.type" class="form-control" required>
-            <option *ngFor="let itemT of itemTypes | enumToArray" [value]="itemT">{{itemT}}</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Weather Type</label>
-          <select name="weather" [ngModel]="newItem.weather" class="form-control" required>
-            <option *ngFor="let itemW of itemWeather | enumToArray" [value]="itemW">{{itemW}}</option>
-          </select>
-        </div>
+      <form class="row" #itemForm="ngForm" (ngSubmit)="onSubmit(itemForm)">
+        <div class="col-12">
+          <div class="form-group">
+            <label>Item Photo</label>
+            <input #fileInput type="file" class="form-control" name="file" (change)="fileChangeEvent($event)"/>
+            <input type="hidden" name="photo">
+          </div>
 
-        <div class="custom-control custom-switch" [ngClass]="{'d-none': !edit}">
-          <input type="checkbox" class="custom-control-input" name="washing" id="customSwitch1" [ngModel]="newItem.washing">
-          <label class="custom-control-label" for="customSwitch1">Send to laundry</label>
+          <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 5"
+            [imageURL]="edit ? envPath + newItem.photo : ''"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"
+          ></image-cropper>
         </div>
+        <div class="col-12">
+          <input *ngIf="edit" [ngModel]="newItem._id" name="_id" type="hidden">
+          <div class="form-group">
+            <label>Item Name</label>
+            <input type="text" class="form-control" name="title" [ngModel]="newItem.title" placeholder="Enter item name"
+                   required>
+          </div>
 
-        <image-cropper
-          [imageChangedEvent]="imageChangedEvent"
-          [maintainAspectRatio]="true"
-          [aspectRatio]="2 / 3"
-          [imageURL]="edit ? envPath + newItem.photo : ''"
-          (imageCropped)="imageCropped($event)"
-          (imageLoaded)="imageLoaded()"
-          (cropperReady)="cropperReady()"
-          (loadImageFailed)="loadImageFailed()"
-        ></image-cropper>
+          <div class="form-group">
+            <label>Item Category</label>
+            <select name="type" [ngModel]="newItem.type" class="form-control" required>
+              <option *ngFor="let itemT of itemTypes | enumToArray" [value]="itemT">{{itemT}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Weather Type</label>
+            <select name="weather" [ngModel]="newItem.weather" class="form-control" required>
+              <option *ngFor="let itemW of itemWeather | enumToArray" [value]="itemW">{{itemW}}</option>
+            </select>
+          </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+          <div class="custom-control custom-switch" [ngClass]="{'d-none': !edit}">
+            <input type="checkbox" class="custom-control-input" name="washing" id="customSwitch1"
+                   [ngModel]="newItem.washing">
+            <label class="custom-control-label" for="customSwitch1">Send to laundry</label>
+          </div>
+
+
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
       </form>
     </div>
   </div>

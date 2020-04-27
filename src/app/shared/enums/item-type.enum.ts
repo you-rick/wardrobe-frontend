@@ -11,7 +11,5 @@ export enum ItemType {
   'skirts | shorts',
   'sweatshirts',
   'shoes',
-  'bags',
-  'swimwear',
-  'accessories'
+  'bags'
 }

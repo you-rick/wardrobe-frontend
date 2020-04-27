@@ -33,11 +33,9 @@ export class ItemsListComponent implements OnInit {
   }
 
   fetchItems() {
-    this.itemSerivce.getItemList().subscribe(
-      res => {
+    this.itemSerivce.getItemList().subscribe(res => {
+      console.log(res);
         this.itemsList = res;
-      },
-      err => {
       }
     );
   }

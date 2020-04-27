@@ -1,18 +1,19 @@
 <div class="row outfit-form-wrapper">
-  <div class="col-24">
+  <div class="col-20">
     <div>
       <h3 class="mb-3" *ngIf="edit">Edit new outfit</h3>
       <h3 class="mb-3" *ngIf="!edit">Create new outfit</h3>
 
 
       <div class="row">
-        <div class="col-7">
-          <div class="zoom-slider">
+        <div class="col-12">
+          <div class="zoom-slider" *ngIf="this.slides.length">
             <ng5-slider [(value)]="zoomRangeValue" [options]="zoomRangeOptions"></ng5-slider>
           </div>
           <div class="sliders-wrapper" [ngStyle]="{'transform': 'scale('+ zoomRangeValue + ')'}">
             <ng-container *ngIf="this.slides.length; else noItems">
-              <ng-container *ngFor="let slide of this.slides">
+              <div class="slider-box" *ngFor="let slide of this.slides; let i = index">
+                <button class="remove-btn" (click)="removeSlider(i)">&times;</button>
                 <ngb-carousel #slider="ngbCarousel" style="width: 400px;" (slide)="onSlide($event)"
                               [activeId]="slide.activeId ? slide.activeId : slide.items[0]">
                   <ng-container *ngFor="let item of slide.items">
@@ -23,7 +24,7 @@
                     </ng-template>
                   </ng-container>
                 </ngb-carousel>
-              </ng-container>
+              </div>
             </ng-container>
           </div>
           <div class="d-flex align-items-center mt-4">
@@ -39,26 +40,19 @@
           </div>
 
         </div>
-        <div class="col-7">
+        <div class="col-12">
           <form #outfitForm="ngForm" (ngSubmit)="onSubmit(outfitForm)">
             <input *ngIf="edit" [ngModel]="newOutfit._id" name="_id" type="hidden">
             <div class="form-group">
-              <label>Item Name<sup>*</sup></label>
+              <label>Outfit Name<sup>*</sup></label>
               <input type="text" class="form-control" name="title" [ngModel]="newOutfit.title"
-                     placeholder="Enter item name" required>
-            </div>
-            <div class="form-group">
-              <label>Item Category</label>
-              <select name="type" [ngModel]="newOutfit.type" class="form-control">
-                <option>Choose category</option>
-                <option *ngFor="let itemT of outfitTypes | enumToArray" [value]="itemT">{{itemT}}</option>
-              </select>
+                     placeholder="Enter outfit name" required>
             </div>
             <div class="form-group">
               <label>Weather Type</label>
               <select name="weather" [ngModel]="newOutfit.weather" class="form-control">
                 <option>Choose type</option>
-                <option *ngFor="let itemW of outfitWeather | enumToArray" [value]="itemW">{{itemW}}</option>
+                <option *ngFor="let outfitW of outfitWeather | enumToArray" [value]="outfitW">{{outfitW}}</option>
               </select>
             </div>
 

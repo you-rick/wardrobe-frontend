@@ -43,18 +43,23 @@
   flex-wrap: wrap;
 
   .outfit {
-    padding: 10px;
+    padding: 8px;
+    background: #fff;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    @include shadow(0 2px 3px 0 rgba(0,0,0,0.1));
 
     .images-box {
-      width: 280px;
-      height: 390px;
+      width: rem(280px);
+      height: rem(390px);
       display: flex;
       flex-wrap: wrap;
 
       .pic {
-        border: 1px solid #fff;
+        border: 2px solid #fff;
         background-position: center;
         background-repeat: no-repeat;
+        background-color: #fff;
         @include background-size(cover);
 
         &.deleted {
@@ -70,7 +75,7 @@
       &_2 {
         .pic {
           width: 100%;
-          height: 195px;
+          height: rem(195px);
         }
       }
 
@@ -78,13 +83,13 @@
         .pic {
           &:nth-child(1) {
             width: 100%;
-            height: 195px;
+            height: 50%;
           }
 
           &:nth-child(2),
           &:nth-child(3) {
             width: 50%;
-            height: 195px;
+            height: 50%;
           }
         }
       }
@@ -92,17 +97,18 @@
       &_4 {
         .pic {
           width: 50%;
-          height: 195px;
+          height: rem(195px);
         }
       }
 
       &_5 {
         .pic {
           width: 50%;
-          height: 130px;
+          height: 25%;
 
           &:last-child {
             width: 100%;
+            height: 50%;
           }
         }
       }
@@ -110,12 +116,16 @@
       &_6 {
         .pic {
           width: 33.333%;
-          height: 195px;
+          height: rem(195px);
         }
       }
     }
 
     .outfit-body {
+      .title {
+        padding: 20px 0;
+        font-weight: 500;
+      }
     }
   }
 }

@@ -1,3 +1,6 @@
+@import "~src/assets/styles/variables";
+@import "~src/assets/styles/mixins";
+
 .item-list {
   li {
     background: rgba(0, 0, 0, 0.04);
@@ -18,6 +21,9 @@
 
 ::ng-deep {
   .outfit-form-wrapper {
+    .carousel-item {
+      background: #fff;
+    }
     .carousel-control-prev, .carousel-control-next {
       opacity: 0.75;
       background: rgba(0,0,0,0.05);
@@ -49,4 +55,22 @@
 
 .sliders-wrapper {
   transform-origin: top left;
+}
+
+.slider-box {
+  position: relative;
+  .remove-btn {
+    width: rem(30px);
+    height: rem(30px);
+    background: #99262d;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
