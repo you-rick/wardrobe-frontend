@@ -30,9 +30,7 @@ export class AddOutfitComponent implements OnInit {
   public outfitTypes = ItemType;
   public outfitWeather = ItemWeather;
   public itemsList;
-  public selectedItems: any[];
   public edit: boolean;
-  public checkedItems: any[];
   public envPath = environment.API_URL;
   public slides: any[] = [];
   public zoomRangeValue: number = 1;
@@ -42,6 +40,7 @@ export class AddOutfitComponent implements OnInit {
     step: 0.1,
     showTicks: true
   }
+
 
   constructor(
     private outfitService: OutfitService,
@@ -64,6 +63,8 @@ export class AddOutfitComponent implements OnInit {
       this.fetchOutfit();
       this.edit = true;
     }
+
+    console.log(this.outfitWeather);
   }
 
 

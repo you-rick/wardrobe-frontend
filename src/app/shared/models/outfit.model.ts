@@ -4,5 +4,6 @@ export class Outfit {
   type?: any[];
   weather?: any[];
   items?: any[];
+  dates?: any[];
   userId?: string;
 }

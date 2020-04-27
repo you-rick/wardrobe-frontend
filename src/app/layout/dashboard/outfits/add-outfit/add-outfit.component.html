@@ -10,11 +10,11 @@
           <div class="zoom-slider" *ngIf="this.slides.length">
             <ng5-slider [(value)]="zoomRangeValue" [options]="zoomRangeOptions"></ng5-slider>
           </div>
-          <div class="sliders-wrapper" [ngStyle]="{'transform': 'scale('+ zoomRangeValue + ')'}">
+          <div class="sliders-wrapper" [ngStyle]="{'width': 'calc(400px *'+ zoomRangeValue + ')'}">
             <ng-container *ngIf="this.slides.length; else noItems">
               <div class="slider-box" *ngFor="let slide of this.slides; let i = index">
                 <button class="remove-btn" (click)="removeSlider(i)">&times;</button>
-                <ngb-carousel #slider="ngbCarousel" style="width: 400px;" (slide)="onSlide($event)"
+                <ngb-carousel #slider="ngbCarousel" style="width: 100%;" (slide)="onSlide($event)"
                               [activeId]="slide.activeId ? slide.activeId : slide.items[0]">
                   <ng-container *ngFor="let item of slide.items">
                     <ng-template ngbSlide id="{{item._id}}">
@@ -50,10 +50,8 @@
             </div>
             <div class="form-group">
               <label>Weather Type</label>
-              <select name="weather" [ngModel]="newOutfit.weather" class="form-control">
-                <option>Choose type</option>
-                <option *ngFor="let outfitW of outfitWeather | enumToArray" [value]="outfitW">{{outfitW}}</option>
-              </select>
+              <ng-select [items]="outfitWeather | enumToArray" name="weather" [multiple]="true" [(ngModel)]="newOutfit.weather"></ng-select>
+
             </div>
 
             <button type="submit" class="btn btn-primary">Save</button>

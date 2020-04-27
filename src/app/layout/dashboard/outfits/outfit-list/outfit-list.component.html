@@ -11,7 +11,7 @@
         </div>
         <div class="outfit-body">
           <h5 class="title">{{outfit.title}}</h5>
-          <p class="text-secondary">{{outfit.type}}</p>
+          <p><span class="text-secondary" *ngFor="let el of outfit.weather">{{el}} </span></p>
         </div>
       </a>
     </ng-container>

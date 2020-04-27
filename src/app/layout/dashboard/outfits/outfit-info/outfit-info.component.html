@@ -28,8 +28,7 @@
 
       </ng-container>
       <div class="card-body">
-        <p class="text-secondary">{{selectedOutfit.weather}}</p>
-        <p class="text-secondary">{{selectedOutfit.type}}</p>
+        <p class="text-secondary" *ngFor="let el of selectedOutfit.weather">{{el}} </p>
       </div>
     </div>
   </div>
