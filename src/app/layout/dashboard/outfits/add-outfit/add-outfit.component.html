@@ -1,7 +1,7 @@
 <div class="row outfit-form-wrapper">
   <div class="col-20">
     <div>
-      <h3 class="mb-3" *ngIf="edit">Edit new outfit</h3>
+      <h3 class="mb-3" *ngIf="edit">Edit outfit</h3>
       <h3 class="mb-3" *ngIf="!edit">Create new outfit</h3>
 
 
@@ -58,7 +58,7 @@
             </div>
             <ng-container *ngIf="newOutfit.dates?.length">
               <div class="mb-3" *ngFor="let date of newOutfit.dates">
-                <p>{{date}}</p>
+                <p *ngIf="!today.isAfter(date)">{{date | date: "fullDate"}}</p>
               </div>
             </ng-container>
 

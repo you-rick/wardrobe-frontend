@@ -1,9 +1,10 @@
-<ngb-datepicker #dp  [displayMonths]="1" [dayTemplate]="t">
+<ngb-datepicker #dp  [displayMonths]="1" [dayTemplate]="t" [minDate]="today">
 </ngb-datepicker>
 
 <ng-template #t let-date="date" let-focused="focused">
   <span class="custom-day" (click)="onDateSelection($event,date)"
         [class.focused]="focused"
+        [class.disabled]="isDisabled(date)"
         [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
         [class.faded]="isHovered(date) || isInside(date)"
         [class.selected]="isDateSelected(date)"

@@ -10,7 +10,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-       <ng-container *ngIf="selectedOutfit.items?.length">
+      <ng-container *ngIf="selectedOutfit.items?.length">
         <ng-container *ngFor="let item of selectedOutfit.items">
           <div *ngIf="item" class="media panel item" [ngClass]="{'bg-laundry' : item.washing}">
             <img class="mr-3" [src]="envPath + item.photo" alt="{{item.title}}">
@@ -29,6 +29,20 @@
       </ng-container>
       <div class="card-body">
         <p class="text-secondary" *ngFor="let el of selectedOutfit.weather">{{el}} </p>
+        <div class="row mt-3">
+          <div class="col-12" *ngIf="dates.before">
+            <h5 class="mb-2">Usage dates:</h5>
+            <p *ngFor="let date of dates.before">
+              {{date | date: "fullDate"}}
+            </p>
+          </div>
+          <div class="col-12" *ngIf="dates.after">
+            <h5 class="mb-2">Future dates:</h5>
+            <p *ngFor="let date of dates.after">
+              {{date | date: "fullDate"}}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

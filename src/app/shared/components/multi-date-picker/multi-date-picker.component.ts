@@ -1,5 +1,6 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import * as moment from "moment";
 
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
@@ -19,13 +20,12 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   templateUrl: './multi-date-picker.component.html',
   styleUrls: ['./multi-date-picker.component.scss']
 })
-export class MultiDatePickerComponent {
-  hoveredDate: NgbDateStruct;
-
-  fromDate: NgbDateStruct;
-  toDate: NgbDateStruct;
-
-  _datesSelected: NgbDateStruct[] = [];
+export class MultiDatePickerComponent implements OnInit {
+  public hoveredDate: NgbDateStruct;
+  public fromDate: NgbDateStruct;
+  public toDate: NgbDateStruct;
+  public today = this.modelToNgbDate(moment());
+  public _datesSelected: NgbDateStruct[] = [];
 
   @Input()
   set datesSelected(value: NgbDateStruct[]) {
@@ -41,8 +41,18 @@ export class MultiDatePickerComponent {
   constructor(calendar: NgbCalendar) {
   }
 
-  onDateSelection(event: any, date: NgbDateStruct) {
+  ngOnInit(): void {
 
+  }
+
+  isDisabled(date: NgbDateStruct) {
+    let _date = this.ngbDateToModel(date);
+    let yesterday = moment().subtract(1, 'days');
+
+    return !yesterday.isBefore(_date);
+  }
+
+  onDateSelection(event: any, date: NgbDateStruct) {
     event.target.parentElement.blur();  //make that not appear the outline
     if (!this.fromDate && !this.toDate) {
       if (event.ctrlKey == true)  //If is CrtlKey pressed
@@ -93,4 +103,20 @@ export class MultiDatePickerComponent {
   isInside = date => after(date, this.fromDate) && before(date, this.toDate);
   isFrom = date => equals(date, this.fromDate);
   isTo = date => equals(date, this.toDate);
+
+
+  modelToNgbDate(date): NgbDateStruct {
+    let d = moment(date, 'YYYY-MM-DD');
+    if (!date) {
+      return null;
+    }
+    return {year: d.year(), month: d.month() + 1, day: d.date() + 1};
+  }
+
+  ngbDateToModel(date: NgbDateStruct): moment.Moment {
+    if (!date) {
+      return null;
+    }
+    return moment(date.year + '-' + date.month + '-' + date.day, 'YYYY-MM-DD');
+  }
 }

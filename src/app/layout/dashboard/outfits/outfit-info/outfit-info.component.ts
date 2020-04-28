@@ -9,6 +9,7 @@ import {ToastService} from "../../../../shared/services/toast.service";
 import {environment} from "../../../../../environments/environment";
 import {switchMap} from "rxjs/operators";
 import {Item} from "../../../../shared/models/item.model";
+import * as moment from "moment";
 
 
 @Component({
@@ -20,6 +21,11 @@ export class OutfitInfoComponent implements OnInit {
   private historyState = window.history.state;
   public selectedOutfit: Outfit;
   public envPath = environment.API_URL;
+  public dates = {
+    before: [],
+    after: []
+  }
+
 
   constructor(
     private itemService: ItemService,
@@ -51,11 +57,17 @@ export class OutfitInfoComponent implements OnInit {
             let removedItems = new Array(outfitItemsLength - items.length);
             outfit.items = items.concat(removedItems);
           }
-
         });
       }
 
+      outfit.dates.forEach(date => {
+        let now = moment();
+        (now.isAfter(date) || now.isSame(date)) && this.dates.before.push(date);
+        now.isBefore(date) && this.dates.after.push(date);
+      });
+
       this.selectedOutfit = outfit;
+      console.log(this.dates);
     });
   }
 

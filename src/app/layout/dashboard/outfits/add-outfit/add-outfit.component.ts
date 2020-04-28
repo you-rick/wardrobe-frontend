@@ -1,11 +1,13 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {Options} from 'ng5-slider';
 import {NgbModal, NgbCarousel, NgbCarouselConfig, NgbNavConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {Options} from 'ng5-slider';
 import {AddItemComponent} from "../../items/add-item/add-item.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {mergeMap, switchMap, tap} from "rxjs/operators";
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {switchMap, tap} from "rxjs/operators";
+import * as moment from "moment";
+
 
 import {Outfit} from "../../../../shared/models/outfit.model";
 import {OutfitService} from "../../../../shared/services/outfit.service";
@@ -13,11 +15,10 @@ import {Item} from "../../../../shared/models/item.model";
 import {ItemService} from "../../../../shared/services/item.service";
 import {ToastService} from "../../../../shared/services/toast.service";
 
-import {ItemType} from "../../../../shared/enums/item-type.enum";
 import {ItemWeather} from "../../../../shared/enums/item-weather.enum";
-
+import {ItemType} from "../../../../shared/enums/item-type.enum";
 import {environment} from "../../../../../environments/environment";
-import {from} from "rxjs";
+
 
 @Component({
   selector: 'app-add-outfit',
@@ -43,20 +44,20 @@ export class AddOutfitComponent implements OnInit {
   }
 
   public newOutfit: Outfit;
-  public outfitTypes = ItemType;
   public outfitWeather = ItemWeather;
-  public itemsList;
+  public outfitTypes = ItemType;
+  public today = moment().subtract(1, 'days');
   public edit: boolean;
   public envPath = environment.API_URL;
   public slides: any[] = [];
   public zoomRangeValue: number = 1;
+  public datesSelected: NgbDateStruct[] = [];
   public zoomRangeOptions: Options = {
     floor: 0.5,
     ceil: 1,
     step: 0.1,
     showTicks: true
   }
-  public datesSelected: NgbDateStruct[] = [];
 
 
   constructor(
@@ -80,15 +81,16 @@ export class AddOutfitComponent implements OnInit {
       this.fetchOutfit();
       this.edit = true;
     }
-
-    console.log(this.outfitWeather);
   }
 
 
   fetchOutfit() {
     this.route.params.pipe(
       switchMap(params => this.outfitService.getOutfitInfo(params.id)),
-      tap((outfit: Outfit) => this.newOutfit = outfit),
+      tap((outfit: Outfit) => {
+        this.datesSelected = outfit.dates.map(date => this.modelToNgbDate(date));
+        this.newOutfit = outfit;
+      }),
       switchMap(outfit => this.itemService.getItemList(outfit.items))
     ).subscribe((items: Item[]) => {
 
@@ -110,8 +112,20 @@ export class AddOutfitComponent implements OnInit {
     this.newOutfit.dates = valueList.map(date => this.ngbDateToModel(date));
   }
 
-  ngbDateToModel(date: NgbDateStruct | null): string | null {
-    return date ? date.day + '-' + this.months[date.month] + '-' + date.year : null;
+  ngbDateToModel(date: NgbDateStruct): moment.Moment {
+    if (!date) {
+      return null;
+    }
+    return moment(date.year + '-' + date.month + '-' + date.day, 'YYYY-MM-DD');
+  }
+
+  modelToNgbDate(date): NgbDateStruct {
+    let d = moment(date, 'YYYY-MM-DD');
+    if (!date) {
+      return null;
+    }
+    console.log(d, d.year(), d.month() + 1, d.date() + 1);
+    return {year: d.year(), month: d.month() + 1, day: d.date() + 1};
   }
 
   removeSlider(id) {
