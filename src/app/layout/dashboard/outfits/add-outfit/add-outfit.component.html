@@ -50,9 +50,17 @@
             </div>
             <div class="form-group">
               <label>Weather Type</label>
-              <ng-select [items]="outfitWeather | enumToArray" name="weather" [multiple]="true" [(ngModel)]="newOutfit.weather"></ng-select>
-
+              <ng-select [items]="outfitWeather | enumToArray" name="weather" [multiple]="true"
+                         [(ngModel)]="newOutfit.weather"></ng-select>
             </div>
+            <div class="mb-3">
+              <app-multi-date-picker [datesSelected]="datesSelected" (datesSelectedChange)="dateChange($event)"></app-multi-date-picker>
+            </div>
+            <ng-container *ngIf="newOutfit.dates?.length">
+              <div class="mb-3" *ngFor="let date of newOutfit.dates">
+                <p>{{date}}</p>
+              </div>
+            </ng-container>
 
             <button type="submit" class="btn btn-primary">Save</button>
           </form>

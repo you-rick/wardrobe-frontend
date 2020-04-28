@@ -5,6 +5,7 @@ import {NgbModal, NgbCarousel, NgbCarouselConfig, NgbNavConfig} from '@ng-bootst
 import {AddItemComponent} from "../../items/add-item/add-item.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {mergeMap, switchMap, tap} from "rxjs/operators";
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 import {Outfit} from "../../../../shared/models/outfit.model";
 import {OutfitService} from "../../../../shared/services/outfit.service";
@@ -26,6 +27,21 @@ import {from} from "rxjs";
 export class AddOutfitComponent implements OnInit {
   @ViewChildren('slider') slider: QueryList<any>;
 
+  readonly months = {
+    '1': 'January',
+    '2': 'February',
+    '3': 'March',
+    '4': 'April',
+    '5': 'May',
+    '6': 'June',
+    '7': 'July',
+    '8': 'August',
+    '9': 'September',
+    '10': 'October',
+    '11': 'November',
+    '12': 'December'
+  }
+
   public newOutfit: Outfit;
   public outfitTypes = ItemType;
   public outfitWeather = ItemWeather;
@@ -40,6 +56,7 @@ export class AddOutfitComponent implements OnInit {
     step: 0.1,
     showTicks: true
   }
+  public datesSelected: NgbDateStruct[] = [];
 
 
   constructor(
@@ -89,10 +106,12 @@ export class AddOutfitComponent implements OnInit {
     });
   }
 
-  fetchItems() {
-    this.itemService.getItemList().subscribe(items => {
-      this.itemsList = items;
-    });
+  dateChange(valueList: NgbDateStruct[]) {
+    this.newOutfit.dates = valueList.map(date => this.ngbDateToModel(date));
+  }
+
+  ngbDateToModel(date: NgbDateStruct | null): string | null {
+    return date ? date.day + '-' + this.months[date.month] + '-' + date.year : null;
   }
 
   removeSlider(id) {
@@ -150,6 +169,7 @@ export class AddOutfitComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     form.value.items = this.slider.map(el => el.activeId);
+    form.value.dates = this.newOutfit.dates;
     console.log(form.value);
 
     if (form.value.items < 2) {
