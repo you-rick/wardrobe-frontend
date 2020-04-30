@@ -16,6 +16,7 @@
             <img class="mr-3" [src]="envPath + item.photo" alt="{{item.title}}">
             <div class="media-body">
               <h6 class="m-0 text-secondary">{{item.title}}</h6>
+              <p class="text-danger" *ngIf="item.washing">Item is in laundry</p>
             </div>
           </div>
           <div *ngIf="!item" class="media panel item removed">
@@ -28,15 +29,17 @@
 
       </ng-container>
       <div class="card-body">
-        <p class="text-secondary" *ngFor="let el of selectedOutfit.weather">{{el}} </p>
-        <div class="row mt-3">
-          <div class="col-12" *ngIf="dates.before">
+        <p>
+           <span class="tags" *ngFor="let el of selectedOutfit.weather">{{el}} </span>
+        </p>
+        <div class="row mt-5">
+          <div class="col-12" *ngIf="dates.before.length">
             <h5 class="mb-2">Usage dates:</h5>
             <p *ngFor="let date of dates.before">
               {{date | date: "fullDate"}}
             </p>
           </div>
-          <div class="col-12" *ngIf="dates.after">
+          <div class="col-12" *ngIf="dates.after.length">
             <h5 class="mb-2">Future dates:</h5>
             <p *ngFor="let date of dates.after">
               {{date | date: "fullDate"}}
@@ -47,5 +50,8 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #noDate>No info yet</ng-template>
 
 <app-toast></app-toast>

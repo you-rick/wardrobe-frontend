@@ -1,3 +1,6 @@
+@import "~src/assets/styles/variables";
+@import "~src/assets/styles/mixins";
+
 .media.item {
   align-items: center;
   background: rgba(0, 0, 0, 0.04);
@@ -13,7 +16,7 @@
     width: 60px;
     height: 90px;
     margin-right: 1rem;
-    background: rgba(255,0,0,0.15);
+    background: rgba(255, 0, 0, 0.15);
   }
 
   & + .media {
@@ -23,6 +26,15 @@
   &.bg-laundry {
     background: rgba(255, 193, 7, 0.2);
   }
+}
+
+.tags {
+  display: inline-block;
+  background: #1C1C1B;
+  color: #fff;
+  padding: rem(4px) rem(12px);
+  margin-right: rem(6px);
+  @include radius(4px);
 }
 
 

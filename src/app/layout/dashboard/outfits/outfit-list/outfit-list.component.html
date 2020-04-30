@@ -11,7 +11,11 @@
         </div>
         <div class="outfit-body">
           <h5 class="title">{{outfit.title}}</h5>
-          <p><span class="text-secondary" *ngFor="let el of outfit.weather">{{el}} </span></p>
+          <p>
+            <span class="text-secondary" *ngFor="let el of outfit.weather;index as i; last as isLast">
+            {{el}}<span *ngIf="!isLast">,</span>
+            </span>
+          </p>
         </div>
       </a>
     </ng-container>

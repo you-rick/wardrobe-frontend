@@ -1,6 +1,6 @@
 <div class="row">
   <div [ngClass]="{'col-20': !isModal, 'col-24': isModal}" *ngIf="newItem">
-    <div class="panel card p-3">
+    <div>
       <h3 class="mb-3" *ngIf="edit">Edit new item</h3>
       <h3 class="mb-3" *ngIf="!edit">Add new item</h3>
       <form class="row" #itemForm="ngForm" (ngSubmit)="onSubmit(itemForm)">

@@ -57,12 +57,12 @@
               <app-multi-date-picker [datesSelected]="datesSelected" (datesSelectedChange)="dateChange($event)"></app-multi-date-picker>
             </div>
             <ng-container *ngIf="newOutfit.dates?.length">
-              <div class="mb-3" *ngFor="let date of newOutfit.dates">
+              <div class="mb-1" *ngFor="let date of newOutfit.dates">
                 <p *ngIf="!today.isAfter(date)">{{date | date: "fullDate"}}</p>
               </div>
             </ng-container>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary mt-5">Save</button>
           </form>
         </div>
       </div>

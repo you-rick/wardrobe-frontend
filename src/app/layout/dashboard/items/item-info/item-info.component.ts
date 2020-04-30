@@ -6,7 +6,7 @@ import {Item} from "../../../../shared/models/item.model";
 import {OutfitService} from "../../../../shared/services/outfit.service";
 import {Outfit} from "../../../../shared/models/outfit.model";
 import {environment} from "../../../../../environments/environment";
-import {switchMap} from "rxjs/operators";
+import {switchMap, map} from "rxjs/operators";
 import {ToastService} from "../../../../shared/services/toast.service";
 
 
@@ -19,7 +19,7 @@ export class ItemInfoComponent implements OnInit {
 
   private historyState = window.history.state;
   public selectedItem: Item;
-  public outfitsWithItem: Outfit[];
+  public outfitsWithItem: Outfit[] = [];
   public envPath = environment.API_URL;
 
   constructor(
@@ -50,8 +50,13 @@ export class ItemInfoComponent implements OnInit {
   }
 
   getOutfitsWithItem() {
-    this.outfitService.getOutfitList(this.selectedItem._id).subscribe((outfits: Outfit[]) => {
-      this.outfitsWithItem = outfits;
+    this.outfitService.getOutfitList(this.selectedItem._id).subscribe((outfits: any[]) => {
+        outfits.forEach(outfit => {
+           this.itemService.getItemList(outfit.items).subscribe(items => {
+             outfit.items = items;
+             this.outfitsWithItem.push(outfit);
+           })
+        })
     });
   }
 
