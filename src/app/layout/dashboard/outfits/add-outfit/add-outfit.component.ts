@@ -8,7 +8,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap, tap} from "rxjs/operators";
 import * as moment from "moment";
 
-
 import {Outfit} from "../../../../shared/models/outfit.model";
 import {OutfitService} from "../../../../shared/services/outfit.service";
 import {Item} from "../../../../shared/models/item.model";
@@ -27,21 +26,6 @@ import {environment} from "../../../../../environments/environment";
 })
 export class AddOutfitComponent implements OnInit {
   @ViewChildren('slider') slider: QueryList<any>;
-
-  readonly months = {
-    '1': 'January',
-    '2': 'February',
-    '3': 'March',
-    '4': 'April',
-    '5': 'May',
-    '6': 'June',
-    '7': 'July',
-    '8': 'August',
-    '9': 'September',
-    '10': 'October',
-    '11': 'November',
-    '12': 'December'
-  }
 
   public newOutfit: Outfit;
   public outfitWeather = ItemWeather;

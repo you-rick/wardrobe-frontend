@@ -4,6 +4,7 @@
 .dashboard-outer-wrapper {
   display: flex;
   background: #efe6d5;
+  padding-left: 14rem;
 }
 
 .content-wrapper {
@@ -13,7 +14,8 @@
 
 h5 {
   border-bottom: 1px solid;
-  padding-bottom: 6px;
+  margin-bottom: 6px;
+  padding-bottom: 2px;
 }
 
 .form-control {
@@ -28,7 +30,6 @@ h5 {
 
 /* === Items Grid === */
 .items-grid {
-  border-left: 1px solid #fff;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -151,11 +152,12 @@ h5 {
 // Components
 .ng-select {
   &.ng-select-focused:not(.ng-select-opened) {
-    & >.ng-select-container {
+    & > .ng-select-container {
       border-color: $primary;
       @include shadow(none);
     }
   }
+
   .ng-select-container.ng-select-container {
     border-color: $primary;
     background: transparent;
