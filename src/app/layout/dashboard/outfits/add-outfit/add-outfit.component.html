@@ -1,4 +1,5 @@
-<div class="row outfit-form-wrapper">
+<div class="container ml-0 mr-0">
+  <div class="row outfit-form-wrapper">
   <div class="col-20">
     <div>
       <h3 class="mb-3" *ngIf="edit">Edit outfit</h3>
@@ -7,7 +8,7 @@
 
       <div class="row">
         <div class="col-12">
-          <div class="zoom-slider" *ngIf="this.slides.length">
+          <div class="zoom-slider mb-3" *ngIf="this.slides.length">
             <ng5-slider [(value)]="zoomRangeValue" [options]="zoomRangeOptions"></ng5-slider>
           </div>
           <div class="sliders-wrapper" [ngStyle]="{'width': 'calc(400px *'+ zoomRangeValue + ')'}">
@@ -53,7 +54,8 @@
               <ng-select [items]="outfitWeather | enumToArray" name="weather" [multiple]="true"
                          [(ngModel)]="newOutfit.weather"></ng-select>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 d-flex flex-column">
+              <label>Set usage date</label>
               <app-multi-date-picker [datesSelected]="datesSelected" (datesSelectedChange)="dateChange($event)"></app-multi-date-picker>
             </div>
             <ng-container *ngIf="newOutfit.dates?.length">
@@ -69,6 +71,9 @@
     </div>
   </div>
 </div>
+</div>
+
+
 
 <ng-template #noItems>No items added</ng-template>
 <app-toast></app-toast>

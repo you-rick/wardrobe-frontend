@@ -1,3 +1,10 @@
+<div class="d-flex justify-content-between w-100 mb-3">
+  <h2>Items</h2>
+  <div>
+    <button class="btn btn-primary" [routerLink]="'add'">Add New item</button>
+  </div>
+</div>
+
 <div class="items-grid">
   <ng-container *ngIf="itemsList && itemsList.length; else noItems">
     <ng-container *ngFor="let item of itemsList">

@@ -6,51 +6,39 @@
   </a>
 
   <!-- Divider -->
-  <hr class="sidebar-divider my-0">
+  <li><hr class="sidebar-divider my-0"></li>
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/dashboard/profile'">
-      <i class="fa fa-user"></i>
-      <span>Profile</span></a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link" [routerLink]="'/dashboard/items'">
-      <i class="fa fa-list"></i>
+      <i class="fa fa-list mr-2"></i>
       <span>items</span></a>
   </li>
+
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/dashboard/items/add'">
-      <i class="fa fa-plus"></i>
-      <span>add item</span></a>
-  </li>
-
-  <hr class="sidebar-divider my-0">
-
-    <li class="nav-item">
     <a class="nav-link" [routerLink]="'/dashboard/outfits'">
-      <i class="fa fa-list"></i>
+      <i class="fa fa-list mr-2"></i>
       <span>outfits</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/dashboard/outfits/add'">
-      <i class="fa fa-plus"></i>
-      <span>add outfit</span></a>
-  </li>
 
-    <hr class="sidebar-divider my-0">
+  <li><hr class="sidebar-divider my-0"></li>
 
   <li class="nav-item">
     <a class="nav-link" [routerLink]="'/dashboard/items/laundry'">
-      <i class="fa fa-trash"></i>
+      <i class="fa fa-trash mr-2"></i>
       <span>laundry</span></a>
   </li>
 
-  <hr class="sidebar-divider my-0">
+  <li><hr class="sidebar-divider my-0"></li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="'/dashboard/profile'">
+      <i class="fa fa-user mr-2"></i>
+      <span>Profile</span></a>
+  </li>
 
   <li class="nav-item">
     <a class="nav-link" (click)="logout()">
-      <i class="fa fa-sign-out"></i>
+      <i class="fa fa-sign-out mr-2"></i>
       <span>log out</span></a>
   </li>
 

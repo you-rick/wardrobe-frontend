@@ -1,10 +1,11 @@
-<div class="row">
+<div class="container ml-0 mr-0" [ngClass]="{'p-3': isModal}">
+  <div class="row">
   <div [ngClass]="{'col-20': !isModal, 'col-24': isModal}" *ngIf="newItem">
     <div>
       <h3 class="mb-3" *ngIf="edit">Edit new item</h3>
       <h3 class="mb-3" *ngIf="!edit">Add new item</h3>
       <form class="row" #itemForm="ngForm" (ngSubmit)="onSubmit(itemForm)">
-        <div class="col-12">
+        <div class="col-md-12 col-sm-24">
           <div class="form-group">
             <label>Item Photo</label>
             <input #fileInput type="file" class="form-control" name="file" (change)="fileChangeEvent($event)"/>
@@ -22,7 +23,7 @@
             (loadImageFailed)="loadImageFailed()"
           ></image-cropper>
         </div>
-        <div class="col-12">
+        <div class="col-md-12 col-sm-24">
           <input *ngIf="edit" [ngModel]="newItem._id" name="_id" type="hidden">
           <div class="form-group">
             <label>Item Name</label>
@@ -46,7 +47,10 @@
           <div class="custom-control custom-switch" [ngClass]="{'d-none': !edit}">
             <input type="checkbox" class="custom-control-input" name="washing" id="customSwitch1"
                    [ngModel]="newItem.washing">
-            <label class="custom-control-label" for="customSwitch1">Send to laundry</label>
+            <label class="custom-control-label" for="customSwitch1">
+              <span *ngIf="newItem.washing">Item washed</span>
+              <span *ngIf="!newItem.washing">Put in laundry</span>
+            </label>
           </div>
 
 
@@ -56,5 +60,8 @@
     </div>
   </div>
 </div>
+</div>
+
+
 
 <app-toast></app-toast>

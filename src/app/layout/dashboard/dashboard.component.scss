@@ -37,9 +37,11 @@ h5 {
     width: rem(200px);
     display: flex;
     flex-direction: column;
-    border-right: 1px solid #fff;
-    border-top: 1px solid #fff;
-    padding: 15px;
+    padding: 8px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    @include shadow(0 2px 3px 0 rgba(0, 0, 0, 0.1));
 
     .item-photo {
       img {
@@ -140,6 +142,61 @@ h5 {
         margin-top: 20px;
         margin-bottom: 10px;
         font-weight: 500;
+      }
+    }
+  }
+}
+
+
+// Components
+.ng-select {
+  &.ng-select-focused:not(.ng-select-opened) {
+    & >.ng-select-container {
+      border-color: $primary;
+      @include shadow(none);
+    }
+  }
+  .ng-select-container.ng-select-container {
+    border-color: $primary;
+    background: transparent;
+  }
+
+  .ng-dropdown-panel {
+    border-color: $primary;
+
+    &.ng-select-bottom {
+      border-top-color: #efe6d5;
+    }
+
+    .ng-dropdown-panel-items {
+      .ng-option {
+        background: #efe6d5;
+
+        &:hover, &.ng-option-selected, &.ng-option-marked {
+          background: #e6dece;
+        }
+      }
+    }
+  }
+
+  &.ng-select-multiple {
+    .ng-select-container {
+      .ng-value-container {
+        .ng-value {
+          background: $primary;
+          color: #fff;
+
+          .ng-value-icon {
+            &:hover {
+              background: $primary;
+              color: #fff;
+            }
+
+            &.left {
+              border-color: #fff;
+            }
+          }
+        }
       }
     }
   }

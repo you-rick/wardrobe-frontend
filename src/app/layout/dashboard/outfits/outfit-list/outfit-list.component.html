@@ -1,10 +1,18 @@
+<div class="d-flex justify-content-between w-100 mb-3">
+  <h2>Outfits</h2>
+  <div>
+    <button class="btn btn-primary" [routerLink]="'add'">Create New Outfit</button>
+  </div>
+</div>
+
 <div class="outfits-grid">
   <ng-container *ngIf="outfitList && outfitList.length; else noItems">
     <ng-container *ngFor="let outfit of outfitList">
       <a class="outfit" [routerLink]="outfit._id">
         <div *ngIf="outfit.items" class="images-box images-box_{{outfit.items.length}}">
           <ng-container *ngFor="let item of outfit.items">
-            <div class="pic" *ngIf="item?.photo" [ngStyle]="{'background-image': 'url('+ envPath + item.photo +')'}"></div>
+            <div class="pic" *ngIf="item?.photo"
+                 [ngStyle]="{'background-image': 'url('+ envPath + item.photo +')'}"></div>
             <div class="pic deleted" *ngIf="!item?.photo">Item removed</div>
           </ng-container>
 

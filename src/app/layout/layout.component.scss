@@ -1,2 +1,8 @@
 @import "~src/assets/styles/variables";
 @import "~src/assets/styles/mixins";
+
+.layout-outer-wrapper {
+  width: 100%;
+  height: 100vh;
+  background: #efe6d5;
+}

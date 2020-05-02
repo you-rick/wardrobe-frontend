@@ -21,13 +21,21 @@
 
 ::ng-deep {
   .outfit-form-wrapper {
+    // Carousel
     .carousel-item {
       background: #fff;
+      .picsum-img-wrapper {
+        img {
+          float: left;
+        }
+      }
     }
+
     .carousel-control-prev, .carousel-control-next {
       opacity: 0.75;
-      background: rgba(0,0,0,0.05);
+      background: rgba(0, 0, 0, 0.05);
     }
+
     .carousel-control-next-icon {
       background: none;
 
@@ -45,6 +53,49 @@
         font-family: "FontAwesome";
       }
     }
+
+    // Zoom Slider
+    .ng5-slider {
+      .ng5-slider-pointer {
+        background-color: $primary;
+
+        &:after {
+          background: #fff !important;
+        }
+      }
+
+      .ng5-slider-tick, .ng5-slider-bar {
+        background-color: #fff;
+      }
+    }
+
+    // Datepicker
+    ngb-datepicker {
+      border-color: $primary;
+
+      .ngb-dp-header {
+        background: $primary;
+
+        .btn, .btn-link {
+          color: #fff;
+
+          &:disabled {
+            color: #fff;
+          }
+        }
+        .custom-select + .custom-select {
+          margin-left: 6px;
+        }
+      }
+
+      .ngb-dp-weekdays {
+        background: $primary;
+
+        .ngb-dp-weekday {
+          color: #fff;
+        }
+      }
+    }
   }
 }
 
@@ -59,6 +110,7 @@
 
 .slider-box {
   position: relative;
+
   .remove-btn {
     width: rem(30px);
     height: rem(30px);

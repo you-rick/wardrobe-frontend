@@ -8,6 +8,7 @@ import {SignInComponent} from "./auth/sign-in/sign-in.component";
 import {SignUpComponent} from "./auth/sign-up/sign-up.component";
 import {HomeComponent} from './home/home.component';
 import { TopBarComponent } from '../shared/components/top-bar/top-bar.component';
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TopBarComponent } from '../shared/components/top-bar/top-bar.component'
     CommonModule,
     LayoutRouting,
     FormsModule,
+    SharedModule,
     NgbModule
   ],
   exports: [LayoutComponent]

@@ -14,16 +14,18 @@
   </div>
   <div class="row">
     <div class="col-5">
-      <img [src]="envPath + selectedItem.photo"/>
-      <p>{{selectedItem.type}}</p>
-      <p> {{selectedItem.weather}}</p>
+      <div class="card p-3">
+        <img [src]="envPath + selectedItem.photo"/>
+        <p class="mt-3">Type - {{selectedItem.type | titlecase}}</p>
+        <p>Weather - {{selectedItem.weather | titlecase}}</p>
+      </div>
     </div>
     <div class="col-8" *ngIf="outfitsWithItem && outfitsWithItem.length">
       <h5 class="mb-3">This item is part of following outfits:</h5>
       <ul *ngFor="let outfit of outfitsWithItem">
         <li class="mb-3">
           <div><a [routerLink]="'/dashboard/outfits/'+ outfit._id">{{outfit.title}}</a></div>
-          <div class="items-img" >
+          <div class="items-img">
             <img *ngFor="let item of outfit.items" [src]="envPath + item.photo"/>
           </div>
         </li>

@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
 
+import {ToastService} from "../../../shared/services/toast.service";
 import {UserService} from "../../../shared/services/user.service";
 
-declare var M: any;
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: ['./sign-in.component.scss', '../auth.component.scss']
 })
 export class SignInComponent implements OnInit {
 
@@ -18,7 +18,11 @@ export class SignInComponent implements OnInit {
     'password': ''
   }
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(
+    private userService: UserService,
+    private toastService: ToastService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -28,12 +32,11 @@ export class SignInComponent implements OnInit {
         res => {
           this.userService.setToken(res['token']);
           console.log('Works well!', res['token']);
-          this.router.navigateByUrl('/dashboard/profile');
-          //M.toast({html: 'Hello again!', classes: 'rounded green'});
+          this.router.navigateByUrl('/dashboard/outfits');
 
         },
         err => {
-          //M.toast({html: err.error.message, classes: 'rounded red'});
+            this.toastService.show(err.error.message, {classname: 'bg-danger text-light'});
           console.log(err.error.message);
         }
     );
