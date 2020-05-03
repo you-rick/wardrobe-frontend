@@ -1,0 +1,21 @@
+<app-top-bar></app-top-bar>
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col auth-box">
+      <ng-container *ngIf="verified; else noToken">
+        <h2 class="mb-4">Email successfully confirmed</h2>
+        <p>
+          Email <strong>{{email}}</strong> confirmed. <br/>
+          Now you can <a [routerLink]="'/sign-in'" class="text-success">Login</a>
+        </p>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #noToken>
+  {{error}}
+</ng-template>
+
+<app-toast></app-toast>

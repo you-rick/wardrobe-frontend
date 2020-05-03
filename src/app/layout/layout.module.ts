@@ -9,6 +9,7 @@ import {SignUpComponent} from "./auth/sign-up/sign-up.component";
 import {HomeComponent} from './home/home.component';
 import { TopBarComponent } from '../shared/components/top-bar/top-bar.component';
 import {SharedModule} from "../shared/shared.module";
+import { EmailConfirmationComponent } from './auth/email-confirmation/email-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {SharedModule} from "../shared/shared.module";
     SignInComponent,
     SignUpComponent,
     HomeComponent,
-    TopBarComponent
+    TopBarComponent,
+    EmailConfirmationComponent
   ],
   imports: [
     CommonModule,

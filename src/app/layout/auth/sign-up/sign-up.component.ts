@@ -38,11 +38,12 @@ export class SignUpComponent implements OnInit {
           this.resetForm(form);
         },
         (err) => {
+          console.log(err);
           let errMsg;
           if (Array.isArray(err.error)) {
             errMsg = err.error.map(item => item + '<br/>').join('');
           } else {
-            errMsg = err.error;
+            errMsg = err.error.message;
           }
           this.toastService.show(errMsg, {classname: 'bg-danger text-light'});
         }
