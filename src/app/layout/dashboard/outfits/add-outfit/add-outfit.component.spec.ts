@@ -1,6 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddOutfitComponent } from './add-outfit.component';
+import {AddOutfitComponent} from './add-outfit.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
+import {FormsModule} from "@angular/forms";
+import {SharedModule} from "../../../../shared/shared.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AddOutfitComponent', () => {
   let component: AddOutfitComponent;
@@ -8,9 +14,17 @@ describe('AddOutfitComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddOutfitComponent ]
+      declarations: [AddOutfitComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        NgbCarouselModule,
+        FormsModule,
+        SharedModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

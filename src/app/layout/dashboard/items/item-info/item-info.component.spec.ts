@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ItemInfoComponent } from './item-info.component';
+import {ItemInfoComponent} from './item-info.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {NgbToastModule} from "@ng-bootstrap/ng-bootstrap";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('ItemInfoComponent', () => {
   let component: ItemInfoComponent;
@@ -8,9 +12,15 @@ describe('ItemInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemInfoComponent ]
+      declarations: [ItemInfoComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        NgbToastModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

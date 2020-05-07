@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MultiDatePickerComponent } from './multi-date-picker.component';
+import {MultiDatePickerComponent} from './multi-date-picker.component';
+import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
 
 describe('MultiDatePickerComponent', () => {
   let component: MultiDatePickerComponent;
@@ -8,9 +9,10 @@ describe('MultiDatePickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MultiDatePickerComponent ]
+      declarations: [MultiDatePickerComponent],
+      imports: [NgbDatepickerModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
