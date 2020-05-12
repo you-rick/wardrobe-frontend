@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EmailConfirmationComponent } from './email-confirmation.component';
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {EmailConfirmationComponent} from './email-confirmation.component';
+import {Component, CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 
@@ -11,14 +11,16 @@ describe('EmailConfirmationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmailConfirmationComponent ],
+      declarations: [EmailConfirmationComponent, testSignInComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          {path: 'sign-in', component: testSignInComponent}
+        ]),
         HttpClientTestingModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -31,3 +33,9 @@ describe('EmailConfirmationComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
+// Dummy component for route testing
+@Component({template: ''})
+class testSignInComponent {
+}
