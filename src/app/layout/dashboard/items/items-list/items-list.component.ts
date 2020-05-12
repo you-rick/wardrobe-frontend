@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ItemService} from "../../../../shared/services/item.service";
 import {environment} from "../../../../../environments/environment";
 import {ToastService} from "../../../../shared/services/toast.service";
+import {Item} from "../../../../shared/models/item.model";
 
 @Component({
   selector: 'app-items-list',
@@ -11,7 +12,7 @@ import {ToastService} from "../../../../shared/services/toast.service";
   styleUrls: ['./items-list.component.scss']
 })
 export class ItemsListComponent implements OnInit {
-  public itemsList;
+  public itemsList:Item[];
   public envPath = environment.API_URL;
   private historyState = window.history.state;
 
@@ -33,7 +34,7 @@ export class ItemsListComponent implements OnInit {
   }
 
   fetchItems() {
-    this.itemSerivce.getItemList().subscribe(res => {
+    this.itemSerivce.getItemList().subscribe((res:Item[]) => {
       console.log(res);
         this.itemsList = res;
       }
